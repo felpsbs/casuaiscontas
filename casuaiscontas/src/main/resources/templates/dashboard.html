@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html 
+    lang="pt-BR"
+    xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>Casuais Contas</title>
+
+        <link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
+        <link rel="stylesheet" th:href="@{/css/base.css}">
+        <link rel="stylesheet" th:href="@{/css/layout.css}">
+        <link rel="stylesheet" th:href="@{/css/compenents.css}">
+    </head>
+    <body>
+    
+        <header class="layout-navbar">
+
+            <nav class="navbar  navbar-expand-md  navbar-light  bg-light">
+                <div class="container">
+                  
+                    <a href="#" class="navbar-brand  navbar__brand">CasuaisContas</a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>             
+                    
+                    <div class="collapse  navbar-collapse  menu" id="menu">
+                        <ul class="navbar-nav  mr-auto">
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Contas</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Despesas</a>
+                            </li>  
+                            <li class="nav-item">
+                                <a href="#" class="nav-link">Admin</a>
+                            </li>                            
+                        </ul>
+                        
+                        <ul class="navbar-nav">
+                            <li class="nav-item dropdown">
+                                <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>
+                                
+                                <div class="dropdown-menu  perfil" aria-labelledby="navbarDropdown">                                    
+                                    <a class="dropdown-item" href="#">Alterar Perfil</a>
+                                    <a class="dropdown-item" href="#">Alterar Senha</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Sair</a>                                
+                                </div>
+                            </li>                                                      
+                        </ul>
+                    </div>
+                    
+                </div>
+            </nav>
+
+        </header>
+
+        <div style="background-color: white; height: 300px;"></div>
+        <div style="background-color: white; height: 300px;"></div>
+        <div style="background-color: white; height: 300px;"></div>
+        <div style="background-color: white; height: 300px;"></div>
+
+        <footer class="layout-footer">
+            <div class="container-fluid">                
+                <p>&copy; 2020 Casuais Contas. Todos os direitos reservados</p>
+            </div>
+        </footer>
+       
+        <script th:src="@{/js/vendors/jquery-3.5.1.min.js}"></script>
+        <script th:src="@{/js/vendors/bootstrap.min.js}"></script>
+
+    </body>
+</html>

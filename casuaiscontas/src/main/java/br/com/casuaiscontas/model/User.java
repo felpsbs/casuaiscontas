@@ -17,8 +17,9 @@ import javax.persistence.Transient;
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.br.CPF;
 
 @Entity
@@ -34,12 +35,12 @@ public class User implements Serializable {
 	@NotBlank(message = "Nome é obrigatório")
 	private String name;
 
-	@NotBlank(message = "E-mail é obrigatório")
 	@Email(message = "E-mail inválido")
+	@NotBlank(message = "E-mail é obrigatório")
 	private String email;
 
+	@Size(min = 6, max = 50, message = "Senha deve ter no mínimo 6 e no máximo 50 caracteres")
 	@NotBlank(message = "Senha é obrigatória")
-	@Length(min = 6, message = "Senha deve ter no mínimo 6 caracteres")
 	private String password;
 
 	@Transient
@@ -48,11 +49,11 @@ public class User implements Serializable {
 	@NotBlank(message = "Número de telefone é obrigatório")
 	private String phone;
 
-	@NotBlank(message = "Número de telefone é obrigatório")
-	@CPF 
+	@CPF(message = "CPF inválido") 
+	@NotBlank(message = "CPF é obrigatório")
 	private String cpf;
 
-	@NotBlank(message = "Data de nascimento é obrigatória")
+	@NotNull(message = "Data de nascimento é obrigatória")
 	private LocalDate birthdate;
 
 	private Boolean active;

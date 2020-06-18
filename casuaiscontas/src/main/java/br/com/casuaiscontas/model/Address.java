@@ -1,22 +1,23 @@
-package br.com.casuaiscontas.model;
+package br.com.casuaiscontas.model; 
 
 import java.io.Serializable;
 
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotNull(message = "Informe um CEP")
+	@NotBlank(message = "Informe um CEP")
 	private String cep;
 
-	@NotNull(message = "Informe uma cidade")
 	@ManyToOne
 	@JoinColumn(name = "id_city")
+	@NotNull(message = "Selecione uma cidade")
 	private City city;
 
 	@Transient

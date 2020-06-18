@@ -1,6 +1,6 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
+import java.io.Serializable; 
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,14 +11,15 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "state")
 public class State implements Serializable {
-
+    
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	  
+	
 	private String name;
+	
 	private String uf;
 
 	public Long getId() {

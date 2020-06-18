@@ -26,13 +26,18 @@ CasuaisContas.CityCombo = (function() {
     function CityCombo(comboState) {
         this.comboState = comboState;
         this.comboCity = $('#city');
+        this.inputHiddenSelectedCity = $('#selectedCityId');
     }
 
     CityCombo.prototype.start = function() {
         this.comboState.on('selected', onStateSelected.bind(this));
+
+        let stateId = this.comboState.comboState.val();
+        findCities.call(this, stateId);
     }
 
     function onStateSelected(event, stateId) {
+        this.inputHiddenSelectedCity.val('');
         findCities.call(this, stateId);
     }
 
@@ -55,15 +60,19 @@ CasuaisContas.CityCombo = (function() {
     }
 
     function onFindCitiesDone(cities) { 
-        let option = '';
-        this.comboCity.html('');
-        
+        let options = [];
+
         cities.forEach(city => {
-            option = $('<option>').val(city.id).text(city.name);
-            this.comboCity.append(option);
+            options.push(`<option value="${city.id}">${city.name}</option>`);
         });
 
+        this.comboCity.html(options.join(''));
         this.comboCity.removeAttr('disabled');
+
+        let selectedCityId = this.inputHiddenSelectedCity.val();
+        if(selectedCityId) {
+            this.comboCity.val(selectedCityId);
+        }
     }
 
     function resetComboCity() {

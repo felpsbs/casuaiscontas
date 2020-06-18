@@ -2,7 +2,8 @@
 <html 
     lang="pt-BR"
     xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:casuaiscontas="http://casuaiscontas.com"
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
     <head>
@@ -12,9 +13,13 @@
         <title>Casuais Contas</title>
 
         <link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <link rel="stylesheet" th:href="@{/css/base.css}">
         <link rel="stylesheet" th:href="@{/css/layout.css}">
         <link rel="stylesheet" th:href="@{/css/compenents.css}">
+        
+        <link rel="shortcut icon" th:href="@{/img/favicon.jpg}"/>
     </head>
     <body>
 
@@ -23,7 +28,9 @@
             <nav class="navbar  navbar-expand-md  navbar-light  bg-light">
                 <div class="container">
                   
-                    <a href="#" class="navbar-brand  navbar__brand">CasuaisContas</a>
+                    <a href="#" class="navbar-brand">
+                        <img th:src="@{/img/logo.png}" class="logo" alt="CasuaisContas">
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
                         <span class="navbar-toggler-icon"></span>
                     </button>             
@@ -66,56 +73,67 @@
                     <h1 class="header__title">Cadastro</h1>                                  
                 </header>
                 
-                <form action="#" method="post">
+                <form th:action="@{/usuarios/novo}" method="post" th:object="${user}">
+
+                    <!-- Isso daqui vai sair, vai virar um fragment depois -->
+
+                    <div class="alert  alert-danger  alert-dismissible" role="alert" th:if="${#fields.hasAnyErrors()}" th:fragment="alert">
+                        <button type="button" class="close" data-dismiss="alert" ><span aria-hidden="true">&times;</span></button>
+                        <th:block th:each="detailedError : ${#fields.detailedErrors()}">
+                            	<div><i class="fa  fa-exclamation-circle"></i> [[${detailedError.message}]]</div>
+                        </th:block>
+                    </div>
+                    
+                    <!-- Isso daqui vai sair, vai virar um fragment depois -->
                             
                     <div class="row">
                         <div class="form-group  col-sm-6">
                             <label for="name" class="control-label"><b>Nome:</b></label>
-                            <input type="text" name="name" id="name" class="form-control  form-input">
+                            <input type="text" th:field="*{name}" id="name" class="form-control  form-input" casuaiscontas:classforerror="name">                            
                         </div>
 
-                        <div class="form-group  col-sm-4"> 
+                        <div class="form-group  col-sm-6"> 
                             <label for="email" class="control-label"><b>Email:</b></label>                                                
-                            <input type="email" name="email" id="email" class="form-control  form-input">
+                            <input type="email" th:field="*{email}" id="email" class="form-control  form-input" casuaiscontas:classforerror="email">
                         </div>                    
                     </div>
                     
                     <div class="row">
                         <div class="form-group  col-sm-4">
                             <label for="phone" class="control-label"><b>Telefone:</b></label>
-                            <input type="text" name="phone" id="phone" class="form-control  form-input  js-phone">
+                            <input type="text" th:field="*{phone}" id="phone" class="form-control  form-input  js-phone" casuaiscontas:classforerror="phone">
                         </div>
 
                         
                         <div class="form-group  col-sm-4">
                             <label for="birthDate" class="control-label"><b>Data de nascimento:</b></label>
-                            <input type="text" name="birthDate" id="birthDate" class="form-control  form-input  js-date">                                                        
+                            <input type="text" th:field="*{birthdate}" id="birthDate" class="form-control  form-input  js-date" casuaiscontas:classforerror="birthdate">                                                        
                         </div>
-                    </div>
-                    <div class="row">
+
                         <div class="form-group  col-sm-4">
                             <label for="cpf" class="control-label"><b>CPF:</b></label>
-                            <input type="text" name="cpf" id="cpf" class="form-control  form-input  js-cpf">
-                        </div>
-
-                        <div class="form-group  col-sm-4">
-                            <label for="cep" class="control-label"><b>CEP:</b></label>
-                            <input type="text" name="cep" id="cep" class="form-control  form-input  js-cep">
+                            <input type="text" th:field="*{cpf}" id="cpf" class="form-control  form-input  js-cpf" casuaiscontas:classforerror="cpf">
                         </div>
                     </div>
-
+                    
                     <div class="row">                        
-                        <div class="form-group  col-sm-6  col-lg-4">
+                        <div class="form-group  col-sm-4">
+                            <label for="cep" class="control-label"><b>CEP:</b></label>
+                            <input type="text" th:field="*{address.cep}" id="cep" class="form-control  form-input  js-cep" casuaiscontas:classforerror="address.cep">
+                        </div>
+                    
+                        <div class="form-group  col-sm-6  col-md-4  col-lg-4">
                             <label for="state" class="control-label"><b>Estado:</b></label>
-                            <select name="state" id="state" class="form-control  form-input">
+                            <select th:field="*{address.state}" id="state" class="form-control  form-input">
                                 <option value="">Selecione uma Estado</option>
                                 <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.name}">Minas Gerais</option>
                             </select>
                         </div>
 
-                        <div class="form-group  col-sm-6  col-lg-4">
-                            <label for="city" class="control-label"><b>Cidade:</b></label>
-                            <select name="city" id="city" class="form-control  form-input" disabled>
+                        <div class="form-group  col-sm-6  col-md-4 col-lg-4">
+                            <label for="city" class="control-label"><b>Cidade:</b></label> 
+                            <input type="hidden" id="selectedCityId" th:value="*{address.city} != null ? *{address.city.id}">                           
+                            <select th:field="*{address.city}" id="city" class="form-control  form-input" disabled casuaiscontas:classforerror="address.city">
                                 <option value="">Selecione uma cidade</option>                                
                             </select>
                         </div>
@@ -124,12 +142,12 @@
                     <div class="row">
                         <div class="form-group  col-sm-4">
                             <label for="password" class="control-label"><b>Senha:</b></label>
-                            <input type="password" name="password" id="password" class="form-control  form-input">
+                            <input type="password" th:field="*{password}" id="password" class="form-control  form-input" casuaiscontas:classforerror="password">
                         </div>
 
                         <div class="form-group  col-sm-4">
                             <label for="confirmPassword" class="control-label"><b>Confirmar senha:</b></label>
-                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control  form-input">
+                            <input type="password" th:field="*{confirmPassword}" id="confirmPassword" class="form-control  form-input" casuaiscontas:classforerror="confirmPassword">
                         </div>
 
                     </div>

@@ -29,9 +29,9 @@ public class City implements Serializable {
 	private String name;
 
 	@JsonIgnore
-	@NotNull(message = "Selecione um estado")
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_state") 
+	@NotNull(message = "Selecione um estado")
 	private State state;
  
 	public Long getId() {  

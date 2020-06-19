@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -37,6 +38,7 @@ public class User implements Serializable {
 
 	@Email(message = "E-mail inválido")
 	@NotBlank(message = "E-mail é obrigatório")
+	@Column(unique = true)
 	private String email;
 
 	@Size(min = 6, max = 50, message = "Senha deve ter no mínimo 6 e no máximo 50 caracteres")

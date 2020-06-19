@@ -3,11 +3,12 @@
 \*---------------------------*/
 
 .layout-navbar {
+    /* Depois colocar essa parte aqui em um modificador */
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1;
+    z-index: 11;
     
     border-bottom: 1px solid #ccc;
 

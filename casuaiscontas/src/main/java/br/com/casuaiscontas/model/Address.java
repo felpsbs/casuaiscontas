@@ -12,7 +12,7 @@ public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "Informe um CEP")
+	@NotBlank(message = "CEP é obrigatório")
 	private String cep;
 
 	@ManyToOne

@@ -8,6 +8,15 @@ CasuaisContas.MaskDate = (function() {
 
     MaskDate.prototype.start = function() {
         this.inputDate.mask('00/00/0000');
+        let options = {
+            language: 'pt-BR',
+            container: '.js-datepicker-container',
+            orientation: 'bottom',
+            autoclose: true,
+            todayHighlight: true
+        }
+
+        this.inputDate.datepicker(options);
     }
 
     return MaskDate;

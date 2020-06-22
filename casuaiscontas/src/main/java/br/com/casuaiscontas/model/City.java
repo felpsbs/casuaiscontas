@@ -25,13 +25,13 @@ public class City implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Nome é obrigatório")	
+	@NotBlank
 	private String name;
 
+	@NotNull
 	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_state") 
-	@NotNull(message = "Selecione um estado")
 	private State state;
  
 	public Long getId() {  

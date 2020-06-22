@@ -23,6 +23,9 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
 
+import br.com.casuaiscontas.validation.constraint.ConfirmationAttribute;
+
+@ConfirmationAttribute(attribute = "password", confirmationAttribute = "confirmPassword", message = "Senhas não conferem")
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
@@ -33,29 +36,27 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@NotBlank(message = "Nome é obrigatório")
+	@NotBlank
 	private String name;
 
-	@Email(message = "E-mail inválido")
-	@NotBlank(message = "E-mail é obrigatório")
+	@Email
+	@NotBlank
 	@Column(unique = true)
 	private String email;
 
-	@Size(min = 6, max = 50, message = "Senha deve ter no mínimo 6 e no máximo 50 caracteres")
-	@NotBlank(message = "Senha é obrigatória")
+	@Size(min = 6, max = 50)
 	private String password;
 
 	@Transient
 	private String confirmPassword;
 
-	@NotBlank(message = "Número de telefone é obrigatório")
+	@NotBlank
 	private String phone;
 
-	@CPF(message = "CPF inválido") 
-	@NotBlank(message = "CPF é obrigatório")
+	@CPF 
 	private String cpf;
 
-	@NotNull(message = "Data de nascimento é obrigatória")
+	@NotNull
 	private LocalDate birthdate;
 
 	private Boolean active;

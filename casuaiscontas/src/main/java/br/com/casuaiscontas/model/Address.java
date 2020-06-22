@@ -12,12 +12,12 @@ public class Address implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@NotBlank(message = "CEP é obrigatório")
+	@NotBlank
 	private String cep;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "id_city")
-	@NotNull(message = "Selecione uma cidade")
 	private City city;
 
 	@Transient

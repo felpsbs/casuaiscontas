@@ -9,6 +9,7 @@ import org.thymeleaf.processor.IProcessor;
 import org.thymeleaf.standard.StandardDialect;
 
 import br.com.casuaiscontas.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
+import br.com.casuaiscontas.thymeleaf.processor.ErrorFeedbackTagProcessor;
 
 @Component
 public class CasuaisContasDialect extends AbstractProcessorDialect {
@@ -21,6 +22,7 @@ public class CasuaisContasDialect extends AbstractProcessorDialect {
 	public Set<IProcessor> getProcessors(String dialectPrefix) {
 		final Set<IProcessor> processors = new HashSet<>();
 		processors.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
+		processors.add(new ErrorFeedbackTagProcessor(dialectPrefix));
 		return processors;
 	}
 

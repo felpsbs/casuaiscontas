@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html 
+    lang="pt" xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+>
+
+    <th:block th:fragment="feedback (field)">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('__${field}__')}" th:errors="*{__${field}__}"></div>         
+    </th:block>
+
+</html>

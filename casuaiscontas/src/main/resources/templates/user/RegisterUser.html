@@ -14,6 +14,7 @@
 
         <link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
         <link rel="stylesheet" th:href="@{/css/vendors/bootstrap-datepicker.standalone.min.css}">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         
         <link rel="stylesheet" th:href="@{/css/base.css}">
@@ -55,7 +56,7 @@
                                     <a class="dropdown-item" href="#">Alterar Perfil</a>
                                     <a class="dropdown-item" href="#">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Sair</a>                                
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Sair</a>                                
                                 </div>
 
                               </li>                                                      
@@ -75,7 +76,9 @@
                     <h1 class="header__title">Cadastro</h1>                                  
                 </header>
                 
-                <form th:action="@{/usuarios/novo}" method="post" th:object="${user}">                 
+                <form th:action="@{/usuarios/novo}" method="post" th:object="${user}">  
+                    
+                    <casuaiscontas:messages />        
                             
                     <div class="row">
                         <div class="form-group  col-sm-6  cc-required">
@@ -85,7 +88,7 @@
                         </div>
 
                         <div class="form-group  col-sm-6  cc-required"> 
-                            <label for="email" class="control-label"><b>Email</b></label>                                                
+                            <label for="email" class="control-label"><b>Email</b></label>                            
                             <input type="email" id="email" class="form-control  form-input"th:field="*{email}" casuaiscontas:classforerror="email">                            
                             <casuaiscontas:errorfeedback field="email" />
                         </div>                    
@@ -93,13 +96,13 @@
                     
                     <div class="row">
                         <div class="form-group  col-sm-4  cc-required">
-                            <label for="phone" class="control-label"><b>Telefone</b></label>
+                            <label for="phone" class="control-label"><i class="fa fa-phone"></i><b> Telefone</b></label>
                             <input type="text" id="phone" class="form-control  form-input  js-phone" th:field="*{phone}" casuaiscontas:classforerror="phone">                            
                             <casuaiscontas:errorfeedback field="phone" />  
                         </div>
                         
                         <div class="form-group  col-sm-4  js-datepicker-container  cc-required">
-                            <label for="birthDate" class="control-label"><b>Data de nascimento</b></label>                        
+                            <label for="birthDate" class="control-label"><i class="fa fa-calendar"></i><b> Data de nascimento</b></label>                        
                             <input type="text" id="birthDate" class="form-control  form-input  js-date" th:field="*{birthdate}" casuaiscontas:classforerror="birthdate" autocomplete="off">                                                                                    
                             <casuaiscontas:errorfeedback field="birthdate" />
                         </div>
@@ -165,7 +168,7 @@
 
         <footer class="layout-footer"> 
             <div class="container-fluid">                
-                <p>&copy; 2020 Casuais Contas. Todos os direitos reservados</p>
+                <p><i class="fa fa-copyright"></i> 2020 Casuais Contas. Todos os direitos reservados</p>
             </div>
         </footer>
 

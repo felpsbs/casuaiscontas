@@ -2,7 +2,7 @@ package br.com.casuaiscontas.model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Embedded;
@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.Valid;
@@ -53,7 +55,7 @@ public class User implements Serializable {
 	@NotBlank
 	private String phone;
 
-	@CPF 
+	@CPF
 	private String cpf;
 
 	@NotNull
@@ -61,13 +63,30 @@ public class User implements Serializable {
 
 	private Boolean active;
 
+	@Column(name = "created_at", updatable = false)
+	private LocalDate createdAt;
+
+	@Column(name = "updated_at")
+	private LocalDate updatedAt;
+
 	@Valid
 	@Embedded
 	private Address address;
 
 	@ManyToMany
 	@JoinTable(name = "user_grupo", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_grupo"))
-	private List<Group> groups;
+	private Set<Group> groups;
+
+	@PrePersist
+	public void onSave() {
+		active = false;
+		createdAt = LocalDate.now();
+	}
+
+	@PreUpdate
+	public void onUpdate() {
+		updatedAt = LocalDate.now();
+	}
 
 	public Long getId() {
 		return id;
@@ -141,6 +160,14 @@ public class User implements Serializable {
 		this.birthdate = birthdate;
 	}
 
+	public LocalDate getCreatedAt() {
+		return createdAt;
+	}
+
+	public LocalDate getUpdatedAt() {
+		return updatedAt;
+	}
+
 	public Address getAddress() {
 		return address;
 	}
@@ -149,7 +176,7 @@ public class User implements Serializable {
 		this.address = address;
 	}
 
-	public List<Group> getGroups() {
+	public Set<Group> getGroups() {
 		return groups;
 	}
 

@@ -7,6 +7,8 @@ CREATE TABLE user (
     cpf VARCHAR(30) NOT NULL,
     birthdate DATETIME NOT NULL,
     active BOOLEAN,
+    created_at DATETIME, 
+    updated_at DATETIME, 
     cep VARCHAR(15) NOT NULL,
     id_city INT,
     FOREIGN KEY (id_city) REFERENCES city(id)

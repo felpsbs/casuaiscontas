@@ -18,17 +18,19 @@
     </head>
     <body>
 
-        <header class="layout-navbar">
+        <header class="layout-header">
 
-            <nav class="navbar  navbar-expand-md  navbar-light  bg-light">
+            <nav class="navbar  navbar-expand-md  navbar-light  bg-light  header">
                 <div class="container">
                   
-                    <a href="#" class="navbar-brand  navbar__brand">CasuaisContas</a>
+                    <a href="#" class="navbar-brand">
+                        <img th:src="@{/img/logo.png}" class="header__logo" alt="CasuaisContas">
+                    </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
                         <span class="navbar-toggler-icon"></span>
                     </button>             
                     
-                    <div class="collapse  navbar-collapse  menu" id="menu">
+                    <div class="collapse  navbar-collapse  header__menu" id="menu">
                         <ul class="navbar-nav  mr-auto">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Contas</a>
@@ -42,11 +44,11 @@
                             <li class="nav-item dropdown">
                                 <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>
                                 
-                                <div class="dropdown-menu  perfil" aria-labelledby="navbarDropdown">                                   
+                                <div class="dropdown-menu  profile-menu" aria-labelledby="navbarDropdown">                                  
                                     <a class="dropdown-item" href="#">Alterar Perfil</a>
                                     <a class="dropdown-item" href="#">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#">Sair</a>                                
+                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Sair</a>                                 
                                 </div>
 
                               </li>                                                      
@@ -60,11 +62,11 @@
 
         <div class="layout-login  col-10  offset-1  col-sm-8  offset-sm-2  col-md-6  offset-md-3  col-xl-4  offset-xl-4">
             
-            <header class="header">
-                <h1 class="header__title">Login</h1>                
+            <header class="page-header">
+                <h1 class="page-header__title">Login</h1>                
             </header>
 
-            <form action="#" method="POST">
+            <form action="#" method="POST" class="form">
                               
                 <div class="row">
                     <div class="form-group  col-sm-12">
@@ -86,9 +88,9 @@
                         <label for="remember" class="form-check-label">Lembre-me</label>
                     </div>
 
-                    <button type="submit" class="btn  btn-primary float-right botao">Entrar</button>
+                    <button type="submit" class="btn  btn-primary  float-right  button">Entrar</button>
                     
-                    <div class="login__link-cadastro">
+                    <div class="login__register-link">
                         <a th:href="@{/usuarios/novo}">Ainda não possui cadastro?</a>
                     </div>                    
                 </footer>
@@ -97,7 +99,7 @@
            
         </div>
 
-        <footer class="layout-footer">
+        <footer class="footer">
             <div class="container-fluid">                
                 <p>&copy; 2020 Casuais Contas. Todos os direitos reservados</p>
             </div>

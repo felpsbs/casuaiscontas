@@ -3,22 +3,10 @@
     lang="pt-BR"
     xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 >
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Casuais Contas</title>
-
-        <link rel="stylesheet" th:href="@{/css/vendors/bootstrap.min.css}">
-        <link rel="stylesheet" th:href="@{/css/base.css}">
-        <link rel="stylesheet" th:href="@{/css/layout.css}">
-        <link rel="stylesheet" th:href="@{/css/compenents.css}">
-    </head>
     <body>
-    
-        <header class="layout-header">
+        
+        <header class="layout-header" th:fragment="header">
 
             <nav class="navbar  navbar-expand-md  navbar-light  bg-light  header">
                 <div class="container">
@@ -59,20 +47,6 @@
             </nav>
 
         </header>
-
-        <div style="background-color: white; height: 300px;"></div>
-        <div style="background-color: white; height: 300px;"></div>
-        <div style="background-color: white; height: 300px;"></div>
-        <div style="background-color: white; height: 300px;"></div>
-
-        <footer class="footer">
-            <div class="container-fluid">                
-                <p>&copy; 2020 Casuais Contas. Todos os direitos reservados</p>
-            </div>
-        </footer>
-       
-        <script th:src="@{/js/vendors/jquery-3.5.1.min.js}"></script>
-        <script th:src="@{/js/vendors/bootstrap.min.js}"></script>
 
     </body>
 </html>

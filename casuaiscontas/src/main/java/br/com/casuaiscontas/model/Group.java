@@ -1,7 +1,7 @@
 package br.com.casuaiscontas.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,7 +26,7 @@ public class Group implements Serializable {
 
 	@ManyToMany
 	@JoinTable(name = "grupo_permition", joinColumns = @JoinColumn(name = "id_grupo"), inverseJoinColumns = @JoinColumn(name = "id_permition"))
-	private List<Permition> permitions;
+	private Set<Permition> permitions;
 
 	public Long getId() {
 		return id;
@@ -44,7 +44,7 @@ public class Group implements Serializable {
 		this.name = name;
 	}
 
-	public List<Permition> getPermitions() {
+	public Set<Permition> getPermitions() {
 		return permitions;
 	}
 

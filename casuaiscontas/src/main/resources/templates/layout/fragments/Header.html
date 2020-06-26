@@ -2,7 +2,8 @@
 <html 
     lang="pt-BR"
     xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org"
+    xmlns:th="http://www.thymeleaf.org"
+    xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 >
     <body>
         
@@ -14,11 +15,11 @@
                     <a href="#" class="navbar-brand">
                         <img th:src="@{/img/logo.png}" class="header__logo" alt="CasuaisContas">
                     </a>
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu">
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" sec:authorize="isAuthenticated()">
                         <span class="navbar-toggler-icon"></span>
                     </button>             
                     
-                    <div class="collapse  navbar-collapse  header__menu" id="menu">
+                    <div class="collapse  navbar-collapse  header__menu" id="menu" sec:authorize="isAuthenticated()">
                         <ul class="navbar-nav  mr-auto">
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Contas</a>
@@ -36,7 +37,7 @@
                                     <a class="dropdown-item" href="#">Alterar Perfil</a>
                                     <a class="dropdown-item" href="#">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="#"><i class="fa fa-sign-out"></i>Sair</a>                                 
+                                    <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out"></i>Sair</a>                                 
                                 </div>
 
                               </li>                                                      

@@ -32,7 +32,7 @@
     SIGN IN
 \*---------------------------*/
 
-.layout-signin {
+.layout-signin, .layout-dashboard {
     margin: 80px 0;
 }
 

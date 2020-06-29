@@ -1,4 +1,4 @@
-package br.com.casuaiscontas.model; 
+package br.com.casuaiscontas.model;
 
 import java.io.Serializable;
 
@@ -32,7 +32,7 @@ public class Address implements Serializable {
 	}
 
 	public State getState() {
-		return state;
+		return city != null ? city.getState() : state;
 	}
 
 	public void setState(State state) {

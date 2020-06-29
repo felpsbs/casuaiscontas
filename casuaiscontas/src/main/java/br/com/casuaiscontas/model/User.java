@@ -46,7 +46,7 @@ public class User implements Serializable {
 	@Column(unique = true)
 	private String email;
 
-	@Size(min = 6, max = 50)
+	@Size(min = 6)
 	private String password;
 
 	@Transient

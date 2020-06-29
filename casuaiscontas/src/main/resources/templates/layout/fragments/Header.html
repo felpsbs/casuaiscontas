@@ -12,7 +12,7 @@
             <nav class="navbar  navbar-expand-md  navbar-light  bg-light  header">
                 <div class="container">
                   
-                    <a href="#" class="navbar-brand">
+                    <a th:href="@{/}" class="navbar-brand">
                         <img th:src="@{/img/logo.png}" class="header__logo" alt="CasuaisContas">
                     </a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu" sec:authorize="isAuthenticated()">
@@ -26,7 +26,7 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Despesas</a>
-                            </li>                            
+                            </li>                                                     
                         </ul>
                         
                         <ul class="navbar-nav">
@@ -34,7 +34,7 @@
                                 <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>
                                 
                                 <div class="dropdown-menu  profile-menu" aria-labelledby="navbarDropdown">                                  
-                                    <a class="dropdown-item" href="#">Alterar Perfil</a>
+                                    <a class="dropdown-item" th:href="@{/usuarios/{id}(id=${#authentication.principal.user.id})}">Alterar Perfil</a>
                                     <a class="dropdown-item" href="#">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out"></i>Sair</a>                                 

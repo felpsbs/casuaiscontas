@@ -25,7 +25,9 @@
                     
                     <form th:action="@{/usuarios/novo}" method="post" th:object="${user}" class="form">  
                         
-                        <casuaiscontas:messages />        
+                        <casuaiscontas:messages />   
+                        
+                        <input type="hidden" th:field="*{id}" />
                                 
                         <div class="row">
                             <div class="form-group  col-sm-6  cc-required">

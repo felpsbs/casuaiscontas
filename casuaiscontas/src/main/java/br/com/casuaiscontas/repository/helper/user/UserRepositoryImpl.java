@@ -12,7 +12,7 @@ public class UserRepositoryImpl implements UserQueries {
 
 	@PersistenceContext
 	private EntityManager manager;
-	
+
 	@Override
 	public Optional<User> byEmailAndActive(String email) {
 		return manager.createQuery("from User where lower(email) = lower(:email) and active = true", User.class)
@@ -21,10 +21,9 @@ public class UserRepositoryImpl implements UserQueries {
 
 	@Override
 	public List<String> findPermitions(User user) {
-		return manager
-				.createQuery("select distinct p.name from User u inner join u.groups g inner join g.permitions p where u = :user", String.class)
-				.setParameter("user", user)
-				.getResultList();
+		return manager.createQuery(
+				"select distinct p.name from User u inner join u.groups g inner join g.permitions p where u = :user",
+				String.class).setParameter("user", user).getResultList();
 	}
 
 }

@@ -23,6 +23,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.DynamicUpdate;
 import org.hibernate.validator.constraints.br.CPF;
 
 import br.com.casuaiscontas.validation.constraint.ConfirmationAttribute;
@@ -30,6 +31,7 @@ import br.com.casuaiscontas.validation.constraint.ConfirmationAttribute;
 @ConfirmationAttribute(attribute = "password", confirmationAttribute = "confirmPassword", message = "Senhas não conferem")
 @Entity
 @Table(name = "user")
+@DynamicUpdate
 public class User implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -61,7 +63,7 @@ public class User implements Serializable {
 	@NotNull
 	private LocalDate birthdate;
 
-	private Boolean active;
+	private boolean active;
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDate createdAt;
@@ -85,6 +87,7 @@ public class User implements Serializable {
 
 	@PreUpdate
 	public void onUpdate() {
+		confirmPassword = password;
 		updatedAt = LocalDate.now();
 	}
 
@@ -144,11 +147,11 @@ public class User implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public Boolean getActive() {
+	public boolean getActive() {
 		return active;
 	}
 
-	public void setActive(Boolean active) {
+	public void setActive(boolean active) {
 		this.active = active;
 	}
 
@@ -178,6 +181,10 @@ public class User implements Serializable {
 
 	public Set<Group> getGroups() {
 		return groups;
+	}
+		
+	public boolean isNew() {
+		return id == null;
 	}
 
 	@Override

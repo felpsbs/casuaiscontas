@@ -75,6 +75,29 @@ CasuaisContas.MaskCpf = (function() {
 
 })();
 
+CasuaisContas.Switch = (function() {
+
+    function Switch() {
+        this.switch = $('.js-status');
+    }
+
+    Switch.prototype.start = function() {
+        let options = {
+            size: 'mini',
+            onColor: 'success',
+            offColor: 'danger',
+            onText: 'Sim',
+            offText: 'Não'
+
+        }
+
+        $('.js-status').bootstrapSwitch(options);
+    }
+
+    return Switch;
+
+})();
+
 $(function() {
     var maskDate = new CasuaisContas.MaskDate();
     maskDate.start();
@@ -87,4 +110,7 @@ $(function() {
 
     var maskCpf = new CasuaisContas.MaskCpf();
     maskCpf.start();
+
+    var bSwitch = new CasuaisContas.Switch();
+    bSwitch.start();
 });

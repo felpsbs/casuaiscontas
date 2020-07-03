@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.UserRepository;
@@ -20,34 +21,45 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
+	@Transactional
 	public void save(User user) {
-		isPresent(user);
-		// criptografar senha
-		encodePassword(user);
+		User existentUser = isPresent(user);
+
+		if (!user.isNew()) {
+			user.setActive(existentUser.getActive());
+			user.setPassword(existentUser.getPassword());
+		} else {
+			encodePassword(user);
+		}
+
+		user.setConfirmPassword(user.getPassword());
+		
 		// enviar email
+
 		repository.save(user);
 	}
 
-	public User findById(Long id) {
-		// Lógica do id aqui
-		return repository.findById(id).get();
+	public User findUserWithGroups(Long id) {
+		return repository.findUserWithGroups(id);
 	}
 
 	private void encodePassword(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		user.setConfirmPassword(user.getPassword());
 	}
 
-	private void isPresent(User user) {
+	private User isPresent(User user) {
 		Optional<User> existentUser = repository.findByEmail(user.getEmail());
-		if (existentUser.isPresent()) {
+		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
 			throw new EmailAlreadyExistsException("E-mail já cadastrado");
 		}
 
 		existentUser = repository.findByCpf(user.getCpf());
-		if (existentUser.isPresent()) {
+		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
 			throw new CpfAlreadyExistsException("CPF já cadastrado");
 		}
+
+		// tem um erro nessa linha aqui, como o admin não tem cpf ai ta retornando null por último
+		return existentUser.orElse(user);
 	}
 
 }

@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import br.com.casuaiscontas.model.City;
 import br.com.casuaiscontas.service.CityService;
 
-@Controller 
+@Controller
 @RequestMapping("/cidades")
 public class CityController {
-	                         
-	@Autowired   
-	private CityService service; 
-	
+
+	@Autowired
+	private CityService service;
+
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-	public @ResponseBody List<City> findCitiesByState(@RequestParam(name = "state", defaultValue = "-1") Long stateId) {		
+	public @ResponseBody List<City> findCitiesByState(@RequestParam(name = "state", defaultValue = "-1") Long stateId) {
 		return service.findByState(stateId);
-	} 
-}  
+	}
+}

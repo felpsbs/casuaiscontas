@@ -23,7 +23,7 @@
                         <h1 class="page-header__title">Cadastro</h1>                                  
                     </header>
                     
-                    <form th:action="@{/usuarios/novo}" method="post" th:object="${user}" class="form">  
+                    <form method="post" th:object="${user}" class="form" th:action="${user.new} ? @{/usuarios/novo} : @{/usuarios/{id}(id=${user.id})}">  
                         
                         <casuaiscontas:messages />   
                         
@@ -89,7 +89,7 @@
                             </div>
                         </div>
     
-                        <div class="row">
+                        <div class="row" th:if="${user.new}">
                             <div class="form-group  col-sm-4  cc-required">
                                 <label for="password" class="control-label"><b>Senha</b></label>
                                 <input type="password" id="password" class="form-control  form-input" th:field="*{password}" casuaiscontas:classforerror="password">                            
@@ -100,9 +100,23 @@
                                 <label for="confirmPassword" class="control-label"><b>Confirmar senha</b></label>
                                 <input type="password" id="confirmPassword" class="form-control  form-input" th:field="*{confirmPassword}" casuaiscontas:classforerror="confirmPassword">                            
                                 <casuaiscontas:errorfeedback field="confirmPassword" />  
-                            </div>                       
+                            </div>                                                         
                         </div>   
-                        
+
+                        <div class="row" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
+                            <div class="form-group  col-sm-6">
+                                <label class="control-label"><b>Grupos</b></label> 
+                                <div>
+                                    <th:block th:each="group : ${grupos}">
+                                        <div>                                            
+                                            <input type="checkbox" class="js-status" th:field="*{groups}" th:value="${group.id}">
+                                            <label th:for="${#ids.prev('groups')}" th:text="${group.name}">Admin</label>
+                                        </div>                                                                    
+                                    </th:block>                                    
+                                </div>
+                            </div>
+                        </div>                           
+
                         <footer>
                             <div class="layout-signin__button">
                                 <button type="submit" class="btn  btn-primary  button">Cadastrar</button>
@@ -110,9 +124,8 @@
                         </footer> 
                         
                     </form>
-    
+                    
                 </div>
-    
             </div>
             
         </section>

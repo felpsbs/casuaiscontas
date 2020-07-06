@@ -24,7 +24,7 @@
                     </header>
                     
                     <form method="post" th:object="${user}" class="form" th:action="${user.new} ? @{/usuarios/novo} : @{/usuarios/{id}(id=${user.id})}">  
-                        
+
                         <casuaiscontas:messages />   
                         
                         <input type="hidden" th:field="*{id}" />
@@ -111,9 +111,9 @@
                                         <div>                                            
                                             <input type="checkbox" class="js-status" th:field="*{groups}" th:value="${group.id}">
                                             <label th:for="${#ids.prev('groups')}" th:text="${group.name}">Admin</label>
-                                        </div>                                                                    
+                                        </div>                                     
                                     </th:block>                                    
-                                </div>
+                                </div>                                                           
                             </div>
                         </div>                           
 

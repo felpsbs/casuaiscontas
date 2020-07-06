@@ -57,6 +57,10 @@ public class City implements Serializable {
 	public void setState(State state) {
 		this.state = state;
 	}
+	
+	public boolean isStateEmpty() {
+		return state == null;
+	}
 
 	@Override
 	public int hashCode() {

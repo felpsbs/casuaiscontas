@@ -40,17 +40,17 @@ public class UserRepositoryImpl implements UserQueries {
 		CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
 
 		Root<User> root = query.from(User.class);
-		
+
 		root.join("groups", JoinType.LEFT);
 		Join<User, Address> address = root.join("address", JoinType.LEFT);
 		Join<Address, City> city = address.join("city", JoinType.LEFT);
 		city.join("state", JoinType.LEFT);
 
 		query.select(root).distinct(true);
-		query.where(criteriaBuilder.equal(root.get("id"), id));		
-		
+		query.where(criteriaBuilder.equal(root.get("id"), id));
+
 		TypedQuery<User> typedQuery = manager.createQuery(query);
-		
+
 		return typedQuery.getResultList().stream().findFirst().get();
 	}
 

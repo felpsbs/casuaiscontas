@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -34,7 +33,7 @@ public class UserController {
 	private GroupService groupService;
 
 	@GetMapping("/novo")
-	public ModelAndView registerForm(User user) {
+	public ModelAndView registerForm(User testarUsuario) {
 		ModelAndView mv = new ModelAndView("user/RegisterUser");
 		mv.addObject("states", stateService.findAll());
 		mv.addObject("grupos", groupService.findAll());
@@ -64,15 +63,10 @@ public class UserController {
 
 	@GetMapping("/{id}")
 	public ModelAndView editForm(@PathVariable Long id) {
-		User user = userService.findUserWithGroups(id);		
+		User user = userService.findUserWithGroups(id);
 		ModelAndView mv = registerForm(user);
 		mv.addObject(user);
 		return mv;
-	}
-	
-	@GetMapping("/test/{id}")
-	public @ResponseBody User testar(@PathVariable Long id) {
-		return userService.findUserWithGroups(id);
 	}
 
 }

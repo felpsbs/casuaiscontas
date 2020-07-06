@@ -74,7 +74,7 @@ public class User implements Serializable {
 	@Valid
 	@Embedded
 	private Address address;
-
+	
 	@ManyToMany
 	@JoinTable(name = "user_grupo", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_grupo"))
 	private Set<Group> groups;
@@ -182,7 +182,11 @@ public class User implements Serializable {
 	public Set<Group> getGroups() {
 		return groups;
 	}
-		
+
+	public void setGroups(Set<Group> groups) {
+		this.groups = groups;
+	}
+
 	public boolean isNew() {
 		return id == null;
 	}

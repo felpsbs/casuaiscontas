@@ -33,7 +33,7 @@ public class UserService {
 		}
 
 		user.setConfirmPassword(user.getPassword());
-		
+
 		// enviar email
 
 		repository.save(user);
@@ -48,17 +48,16 @@ public class UserService {
 	}
 
 	private User isPresent(User user) {
-		Optional<User> existentUser = repository.findByEmail(user.getEmail());
-		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
-			throw new EmailAlreadyExistsException("E-mail já cadastrado");
-		}
-
-		existentUser = repository.findByCpf(user.getCpf());
+		Optional<User> existentUser = repository.findByCpf(user.getCpf());
 		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
 			throw new CpfAlreadyExistsException("CPF já cadastrado");
 		}
 
-		// tem um erro nessa linha aqui, como o admin não tem cpf ai ta retornando null por último
+		existentUser = repository.findByEmail(user.getEmail());
+		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
+			throw new EmailAlreadyExistsException("E-mail já cadastrado");
+		}
+
 		return existentUser.orElse(user);
 	}
 

@@ -21,17 +21,17 @@
 }
 
 /*---------------------------\*
-    PAGE HEADER
+    FORM HEADER
 \*---------------------------*/
 
-.page-header {
+.form-header {
     border-bottom: 1px solid #ccc;
     
     margin-top: 15px;
     margin-bottom: 25px;
 }
 
-.page-header__title {
+.form-header__title {
     margin: 0 0 5px;
 
     color: #004b68;

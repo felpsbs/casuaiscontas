@@ -38,7 +38,7 @@ public class UserService {
 
 		repository.save(user);
 	}
-
+	
 	public User findUserWithGroups(Long id) {
 		return repository.findUserWithGroups(id);
 	}

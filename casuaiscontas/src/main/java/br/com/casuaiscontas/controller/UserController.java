@@ -3,6 +3,7 @@ package br.com.casuaiscontas.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,6 +62,7 @@ public class UserController {
 		return new ModelAndView("redirect:/usuarios/novo");
 	}
 
+	@PreAuthorize("#id == principal.user.id or hasRole('ROLE_CADASTRAR_USUARIO')")
 	@GetMapping("/{id}")
 	public ModelAndView editForm(@PathVariable Long id) {
 		User user = userService.findUserWithGroups(id);

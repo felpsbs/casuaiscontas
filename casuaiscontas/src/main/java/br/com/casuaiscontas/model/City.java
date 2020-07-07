@@ -58,8 +58,12 @@ public class City implements Serializable {
 		this.state = state;
 	}
 	
-	public boolean isStateEmpty() {
-		return state == null;
+	public boolean isNew() {
+		return id == null;
+	}
+	
+	public boolean hasState() {
+		return state != null;
 	}
 
 	@Override

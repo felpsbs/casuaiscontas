@@ -35,9 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			.authorizeRequests()
-//				.antMatchers("/cidades/nova").hasRole("CADASTRAR_CIDADE") // mudar isso daqui depois
 				.antMatchers(HttpMethod.GET, "/cidades").permitAll()
 				.antMatchers("/usuarios/novo").permitAll()
+				.antMatchers("/cidades/nova").hasRole("CADASTRAR_CIDADE")
 				.anyRequest().authenticated()
 				.and()
 			.formLogin()

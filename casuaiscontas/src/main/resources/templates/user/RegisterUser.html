@@ -17,14 +17,14 @@
 
             <div class="layout-signin">
                 
-                <div class="container">
-    
-                    <header class="page-header">
-                        <h1 class="page-header__title">Cadastro</h1>                                  
-                    </header>
+                <div class="container">    
                     
-                    <form method="post" th:object="${user}" class="form" th:action="${user.new} ? @{/usuarios/novo} : @{/usuarios/{id}(id=${user.id})}">  
-
+                    <form th:action="${user.new} ? @{/usuarios/novo} : @{/usuarios/{id}(id=${user.id})}" th:object="${user}" class="form" method="post">  
+                        
+                        <header class="form-header">
+                            <h1 class="form-header__title" th:text="${user.new ? 'Cadastro' : 'Atualização'}">Cadastro</h1>                                  
+                        </header>
+                        
                         <casuaiscontas:messages />   
                         
                         <input type="hidden" th:field="*{id}" />
@@ -73,7 +73,7 @@
                             <div class="form-group  col-sm-6  col-md-4  col-lg-4">
                                 <label for="state" class="control-label"><b>Estado</b></label>
                                 <select id="state" class="form-control  form-input" th:field="*{address.state}">
-                                    <option value="">Selecione uma Estado</option>
+                                    <option value="">Selecione um Estado</option>
                                     <option th:each="state : ${states}" th:value="${state.id}" th:text="${state.name}">Minas Gerais</option>
                                 </select>
                                 <casuaiscontas:errorfeedback field="address.state" />

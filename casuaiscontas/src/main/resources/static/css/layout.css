@@ -18,10 +18,12 @@
     LOGIN
 \*---------------------------*/
 
-.layout-login {
+.layout-center--login {
     border: 1px solid #ccc;
     border-radius: 5px;
-    
+}
+
+.layout-center {
     padding: 20px 30px;
     margin-top: 50vh;
 

@@ -35,7 +35,7 @@ public class UserRepositoryImpl implements UserQueries {
 	}
 
 	@Override
-	public User findUserWithGroups(Long id) {
+	public Optional<User> findUserWithGroups(Long id) {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
 
@@ -51,7 +51,7 @@ public class UserRepositoryImpl implements UserQueries {
 
 		TypedQuery<User> typedQuery = manager.createQuery(query);
 
-		return typedQuery.getResultList().stream().findFirst().get();
+		return typedQuery.getResultList().stream().findFirst();
 	}
 
 }

@@ -11,6 +11,7 @@ import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.UserRepository;
 import br.com.casuaiscontas.service.exception.CpfAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.EmailAlreadyExistsException;
+import br.com.casuaiscontas.service.exception.UserNotFoundException;
 
 @Service
 public class UserService {
@@ -40,7 +41,7 @@ public class UserService {
 	}
 	
 	public User findUserWithGroups(Long id) {
-		return repository.findUserWithGroups(id);
+		return repository.findUserWithGroups(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));		
 	}
 
 	private void encodePassword(User user) {

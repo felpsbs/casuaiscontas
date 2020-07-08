@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+    <body>
+
+        <div class="layout-center  col-10  offset-1  col-sm-8  offset-sm-2  col-md-6  offset-md-3  col-xl-4  offset-xl-4  error">
+            
+            <div class="card  text-center">
+                
+                <div class="card-header">
+                    <h1 class="error__code"><i class="fa  fa-location-arrow"></i>404</h1>                        
+                </div>
+                
+                <div class="card-body">                        
+                    <h2 class="card-title  error__message">Página não encontrada!</h2>
+                    <div class="error__description  card-text">
+                        <p>Desculpe, a página que você tentou acessar não foi encontrada ou não existe mais.
+                        Verifique se a URL está correta ou entre em contato com a gente se precisar de ajuda.</p>
+                    </div>
+                </div>
+                
+                <div class="card-footer  text-muted">
+                    <a th:href="@{/}" class="btn btn-primary  error__button">Ir para a home</a>                                                
+                </div>
+                
+            </div>
+
+        </div>             
+                    
+    </body>
+</html>

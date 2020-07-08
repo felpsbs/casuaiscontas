@@ -7,9 +7,9 @@ import br.com.casuaiscontas.model.User;
 
 public interface UserQueries {
 
-	User findUserWithGroups(Long id);
-	
 	List<String> findPermitions(User user);
+
+	Optional<User> findUserWithGroups(Long id);	
 	
 	Optional<User> byEmailAndActive(String email);
 	

@@ -26,7 +26,10 @@
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Despesas</a>
-                            </li>                                                     
+                            </li>
+                            <li class="nav-item" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
+                                <a th:href="@{/cidades/nova}" class="nav-link">Cidades</a>
+                            </li>                                                                                                          
                         </ul>
                         
                         <ul class="navbar-nav">

@@ -22,12 +22,10 @@
                     <form th:action="@{/cidades/nova}" th:object="${city}" class="form" method="post">  
                         
                         <header class="form-header">
-                            <h1 class="form-header__title" th:text="${city.new ? 'Cadastro de cidade' : 'Atualização de cidade'}">Cadastro de cidade</h1>                                  
+                            <h1 class="form-header__title" th:text="${city.new ? 'Cadastrar cidade' : 'Atualizar cidade'}">Cadastro de cidade</h1>                                  
                         </header>
 
-                        <casuaiscontas:messages />   
-                        
-                        <input type="hidden" th:field="*{id}" />
+                        <casuaiscontas:messages />                                                   
                                 
                         <div class="row">
                             <div class="form-group  col-sm-6  col-md-4  col-lg-4  cc-required">

@@ -74,6 +74,14 @@
     content: "*";
 }
 
+.input-group-text {
+    font-size: 1.4rem;
+}
+
+#description {
+    resize: none;
+}
+
 /*---------------------------\*
     PROFILE MENU
 \*---------------------------*/

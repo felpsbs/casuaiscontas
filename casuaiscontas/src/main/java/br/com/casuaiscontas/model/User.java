@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -74,10 +75,13 @@ public class User implements Serializable {
 	@Valid
 	@Embedded
 	private Address address;
-	
+
 	@ManyToMany
 	@JoinTable(name = "user_grupo", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_grupo"))
 	private Set<Group> groups;
+
+	@OneToMany(mappedBy = "user", orphanRemoval = true)
+	private Set<Bill> bills;
 
 	@PrePersist
 	public void onSave() {
@@ -185,6 +189,14 @@ public class User implements Serializable {
 
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
+	}
+
+	public Set<Bill> getBills() {
+		return bills;
+	}
+
+	public void setBills(Set<Bill> bills) {
+		this.bills = bills;
 	}
 
 	public boolean isNew() {

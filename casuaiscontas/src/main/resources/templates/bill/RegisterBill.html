@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/BaseLayout}"
+    xmlns:casuaiscontas="http://casuaiscontas.com"
+>
+    <head>
+
+        <title>Cadastro de conta</title>
+
+    </head>
+    <body>
+
+        <section layout:fragment="content">
+
+            <div class="layout-signin">
+                
+                <div class="container">    
+                    
+                    <form th:action="@{/contas/nova}" th:object="${bill}" class="form" method="post">  
+                        
+                        <header class="form-header">
+                            <h1 class="form-header__title" th:text="${bill.new ? 'Cadastrar conta' : 'Atualizar conta'}">Cadastro</h1>                                  
+                        </header>
+                        
+                        <casuaiscontas:messages />                                                 
+                                
+                        <div class="row">
+                            <div class="form-group  col-sm-6  col-md-4  cc-required">
+                                <label for="name" class="control-label"><b>Nome:</b></label>
+                                <input type="text" id="name" class="form-control  form-input" th:field="*{name}" casuaiscontas:classforerror="name">
+                                <casuaiscontas:errorfeedback field="name" />
+                            </div>
+    
+                            <div class="form-group  col-sm-6  col-md-4  cc-required"> 
+                                <label for="price" class="control-label"><b>Preço:</b></label>                                                
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                      <span class="input-group-text">R$</span>
+                                    </div>
+                                    <input type="text" id="price" class="form-control  form-input" th:field="*{price}" casuaiscontas:classforerror="price">                                
+                                    <casuaiscontas:errorfeedback field="price" />
+                                </div>
+                            </div>    
+                            
+                            <div class="form-group  col-sm-6  col-md-4  js-datepicker-container  cc-required" id="myModalId">
+                                <label for="dueDate" class="control-label"><i class="fa fa-calendar"></i><b> Data de vencimento</b></label> 
+                                <input type="text" id="dueDate" class="form-control  form-input  js-date" th:field="*{dueDate}" casuaiscontas:classforerror="dueDate" autocomplete="off">                                                        
+                                <casuaiscontas:errorfeedback field="dueDate" />
+                            </div> 
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group  col-sm-12  cc-required">
+                                <label for="description" class="control-label"><b>Descrição:</b></label>                                                
+                                <textarea id="description" class="form-control  form-input" th:field="*{description}" casuaiscontas:classforerror="description"></textarea>                        
+                                <casuaiscontas:errorfeedback field="description" />
+                            </div>
+                        </div>
+    
+                        <div class="row" th:if="${not bill.new}">
+                            <div class="form-group  col-sm-6  col-lg-4  cc-required">
+                                <label for="status" class="control-label"><b>Status:</b></label>
+                                <select id="status" class="form-control  form-input" th:field="*{status}" casuaiscontas:classforerror="status">
+                                    <option value="">Selecione um status</option>
+                                    <option th:each="status : ${allStatus}" th:value="${status}" th:text="${status.description}">Paga</option>
+                                </select>
+                                <casuaiscontas:errorfeedback field="status" />
+                            </div>
+                        </div>                        
+
+                        <footer>
+                            <div class="layout-signin__button">
+                                <button type="submit" class="btn  btn-primary  button" th:text="${bill.new ? 'Cadastrar' : 'Atualizar'}">Cadastrar</button>
+                            </div>
+                        </footer> 
+                        
+                    </form>
+                    
+                </div>
+            </div>
+            
+        </section>
+
+        <th:block layout:fragment="js-extra">
+            <script th:src="@{/js/user.state-city-combo.js}"></script>
+        </th:block>
+
+    </body>
+</html>

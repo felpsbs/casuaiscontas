@@ -22,7 +22,7 @@
                     <div class="collapse  navbar-collapse  header__menu" id="menu" sec:authorize="isAuthenticated()">
                         <ul class="navbar-nav  mr-auto">
                             <li class="nav-item">
-                                <a href="#" class="nav-link">Contas</a>
+                                <a th:href="@{/contas/nova}" class="nav-link">Contas</a>
                             </li>
                             <li class="nav-item">
                                 <a href="#" class="nav-link">Despesas</a>

@@ -1,6 +1,6 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable; 
+import java.io.Serializable;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

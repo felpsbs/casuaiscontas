@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,11 +19,18 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.validation.constraints.DecimalMax;
 import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.DynamicUpdate;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "bill")
+@DynamicUpdate
 public class Bill implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,8 +49,11 @@ public class Bill implements Serializable {
 	@DecimalMin(value = "0.50")
 	@DecimalMax(value = "9999999.99")
 	private BigDecimal price;
-	
-	// adicionar o campo quantidade
+
+	@NotNull
+	@Min(value = 1)
+	@Max(value = 9999)
+	private Integer quantity;
 
 	@NotNull
 	@Column(name = "due_date")
@@ -56,16 +67,17 @@ public class Bill implements Serializable {
 
 	@Column(name = "updated_at")
 	private LocalDate updatedAt;
-
-	@ManyToOne
+	
+	@JsonIgnore
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "id_user", nullable = false)
 	private User user;
-	
+
 	@PrePersist
 	public void onSave() {
 		createdAt = LocalDate.now();
 	}
-	
+
 	@PreUpdate
 	public void onUpdate() {
 		updatedAt = LocalDate.now();
@@ -101,6 +113,14 @@ public class Bill implements Serializable {
 
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public LocalDate getDueDate() {
@@ -142,9 +162,13 @@ public class Bill implements Serializable {
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
 	public boolean isNew() {
 		return id == null;
+	}
+	
+	public BigDecimal getTotal() {		
+		return price.multiply(new BigDecimal(quantity));
 	}
 
 	@Override

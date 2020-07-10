@@ -98,6 +98,22 @@ CasuaisContas.Switch = (function() {
 
 })();
 
+CasuaisContas.MaskMoney = (function() {
+
+    function MaskMoney() {
+        this.decimal = $('.js-decimal');
+        this.plain = $('.js-plain');
+    }
+
+    MaskMoney.prototype.start = function() {
+        this.plain.mask("#.##0", { reverse: true });
+        this.decimal.mask("#.##0,00", { reverse: true });
+    }
+
+    return MaskMoney;
+
+})();
+
 $(function() {
     var maskDate = new CasuaisContas.MaskDate();
     maskDate.start();
@@ -113,4 +129,7 @@ $(function() {
 
     var bSwitch = new CasuaisContas.Switch();
     bSwitch.start();
+
+    var maskMoney = new CasuaisContas.MaskMoney();
+    maskMoney.start();
 });

@@ -58,7 +58,7 @@ public class UserController {
 		}
 
 		attr.addFlashAttribute("success", true);
-		attr.addFlashAttribute("message", "Operação realizada com sucesso");
+		attr.addFlashAttribute("message", successMessage(user));
 		return new ModelAndView("redirect:/usuarios/novo");
 	}
 
@@ -69,6 +69,10 @@ public class UserController {
 		ModelAndView mv = registerForm(user);
 		mv.addObject(user);
 		return mv;
+	}
+	
+	private String successMessage(User user) {
+		return user.isNew() ? "Cadastro realizado com sucesso, verifique seu e-mail!" : "Operação realizada com sucesso"; 
 	}
 
 }

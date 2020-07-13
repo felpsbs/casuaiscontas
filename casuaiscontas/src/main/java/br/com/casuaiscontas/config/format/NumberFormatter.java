@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public abstract class NumberFormatter<T extends Number> implements Formatter<T> {
-
+	
 	@Override
 	public String print(T object, Locale locale) {
 		NumberFormat format = new DecimalFormat(pattern(locale), new DecimalFormatSymbols(locale));

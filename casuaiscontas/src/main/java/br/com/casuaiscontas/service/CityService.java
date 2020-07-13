@@ -23,7 +23,7 @@ public class CityService {
 		if(existentCity.isPresent()) {
 			throw new CityAlreadyExistsException("Cidade já cadastrada");
 		}
-		
+			
 		repository.save(city);		
 	}
 		

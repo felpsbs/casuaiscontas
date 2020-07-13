@@ -7,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
 @MappedSuperclass
-public class BaseModel {
+public abstract class BaseModel {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

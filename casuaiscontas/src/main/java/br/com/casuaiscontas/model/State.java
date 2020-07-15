@@ -1,13 +1,11 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "state")
-public class State extends BaseModel implements Serializable {
+public class State extends BaseModel {
     
 	private static final long serialVersionUID = 1L;
 	

@@ -1,6 +1,5 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -11,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "grupo")
-public class Group extends BaseModel implements Serializable {
+public class Group extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 

@@ -1,6 +1,5 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -29,7 +28,7 @@ import br.com.casuaiscontas.validation.constraint.ConfirmationAttribute;
 @Entity
 @Table(name = "user")
 @DynamicUpdate
-public class User extends BaseModel implements Serializable {
+public class User extends BaseModel {
 
 	private static final long serialVersionUID = 1L;
 

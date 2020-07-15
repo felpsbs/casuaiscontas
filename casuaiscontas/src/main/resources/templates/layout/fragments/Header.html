@@ -21,28 +21,31 @@
                     
                     <div class="collapse  navbar-collapse  header__menu" id="menu" sec:authorize="isAuthenticated()">
                         <ul class="navbar-nav  mr-auto">
-                            <li class="nav-item">
+                            <li class="nav-item" th:unless="${#authorization.expression('hasRole(''ROLE_CADASTRAR_USUARIO'')')}">
                                 <a th:href="@{/contas/nova}" class="nav-link">Contas</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item" th:unless="${#authorization.expression('hasRole(''ROLE_CADASTRAR_USUARIO'')')}">
                                 <a href="#" class="nav-link">Despesas</a>
                             </li>
-                            <li class="nav-item" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
-                                <a th:href="@{/cidades/nova}" class="nav-link">Cidades</a>
-                            </li>                                                                                                          
+                            <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
+                                <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Admin</a>                                
+                                <div class="dropdown-menu  dropdown-menu" aria-labelledby="navbarDropdown">                                                                      
+                                    <a class="dropdown-item" href="#">Usuários</a> 
+                                    <div class="dropdown-divider"></div>                                                                  
+                                    <a th:href="@{/cidades/nova}" class="dropdown-item">Cidades</a>                                                                   
+                                </div>
+                            </li>                                                             
                         </ul>
                         
                         <ul class="navbar-nav">
                             <li class="nav-item dropdown">
-                                <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>
-                                
-                                <div class="dropdown-menu  profile-menu" aria-labelledby="navbarDropdown">                                  
+                                <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>                                
+                                <div class="dropdown-menu  dropdown-menu" aria-labelledby="navbarDropdown">                                  
                                     <a class="dropdown-item" th:href="@{/usuarios/{id}(id=${#authentication.principal.user.id})}">Alterar Perfil</a>
                                     <a class="dropdown-item" href="#">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out"></i>Sair</a>                                 
                                 </div>
-
                               </li>                                                      
                         </ul>
                     </div>

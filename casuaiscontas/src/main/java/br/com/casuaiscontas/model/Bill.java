@@ -1,6 +1,5 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -28,7 +27,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name = "bill")
 @DynamicUpdate
-public class Bill extends BaseModel implements Serializable {
+public class Bill extends BaseModel{
 
 	private static final long serialVersionUID = 1L;
 

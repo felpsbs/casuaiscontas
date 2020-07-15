@@ -1,7 +1,5 @@
 package br.com.casuaiscontas.model;
 
-import java.io.Serializable;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
@@ -13,7 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "city")
-public class City extends BaseModel implements Serializable {
+public class City extends BaseModel {
  
 	private static final long serialVersionUID = 1L;
 

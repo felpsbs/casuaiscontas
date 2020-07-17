@@ -47,3 +47,33 @@
         text-align: center;
     }
 }
+
+/*---------------------------\*
+    TABLE
+\*---------------------------*/
+
+.layout-table {
+    margin-top: 15px;
+}
+
+.layout-pagination {
+    margin-top: 10px;
+}
+
+.js-tooltip:first-child {
+    margin-right: 5px;
+}
+
+.js-tooltip:last-child {
+    color: #FF0000;
+}
+
+.tooltip {
+    font-size: 1.4rem;
+}
+
+@media(max-width: 576px) {
+    .layout-pagination {
+        margin: 10px 0;
+    }
+}

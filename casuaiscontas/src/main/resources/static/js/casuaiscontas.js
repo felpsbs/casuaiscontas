@@ -114,6 +114,20 @@ CasuaisContas.MaskMoney = (function() {
 
 })();
 
+CasuaisContas.Tooltip = (function() {
+
+    function Tooltip() {
+        this.actions = $('.js-tooltip');
+    }
+
+    Tooltip.prototype.start = function() {
+        $('.js-tooltip').tooltip();
+    }
+
+    return Tooltip;
+
+})();
+
 $(function() {
     var maskDate = new CasuaisContas.MaskDate();
     maskDate.start();
@@ -132,4 +146,7 @@ $(function() {
 
     var maskMoney = new CasuaisContas.MaskMoney();
     maskMoney.start();
+
+    var tooltip = new CasuaisContas.Tooltip();
+    tooltip.start();
 });

@@ -10,6 +10,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
 
+	private static final int PAGES_LIMIT = 10;
 	private Page<T> page;
 	private UriComponentsBuilder componentsBuilder;
 	
@@ -38,10 +39,20 @@ public class PageWrapper<T> {
 		return page.isLast();
 	}
 	
-	public int getTotal() {
+	public int getTotalPages() {
 		return page.getTotalPages();
 	}
 	
+	// first element
+	public int getBegin() {
+		return Math.max(1,  (this.getCurrentPage() - PAGES_LIMIT) + 1);
+	}
+
+	// last element
+	public int getEnd() {
+		return this.getTotalPages() < PAGES_LIMIT ? this.getTotalPages() : this.getBegin() + PAGES_LIMIT;		
+	}
+		
 	public String urlToPage(int page) {
 		return componentsBuilder.replaceQueryParam("page", page).build(true).encode().toUriString();
 	}

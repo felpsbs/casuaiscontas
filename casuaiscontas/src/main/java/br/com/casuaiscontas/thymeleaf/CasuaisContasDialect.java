@@ -11,6 +11,7 @@ import org.thymeleaf.standard.StandardDialect;
 import br.com.casuaiscontas.thymeleaf.processor.ClassForErrorAttributeTagProcessor;
 import br.com.casuaiscontas.thymeleaf.processor.FieldErrorElementTagProcessor;
 import br.com.casuaiscontas.thymeleaf.processor.MessageElementTagProcessor;
+import br.com.casuaiscontas.thymeleaf.processor.PaginationElementTagProcessor;
 
 @Component
 public class CasuaisContasDialect extends AbstractProcessorDialect {
@@ -25,6 +26,7 @@ public class CasuaisContasDialect extends AbstractProcessorDialect {
 		processors.add(new ClassForErrorAttributeTagProcessor(dialectPrefix));
 		processors.add(new FieldErrorElementTagProcessor(dialectPrefix));
 		processors.add(new MessageElementTagProcessor(dialectPrefix));
+		processors.add(new PaginationElementTagProcessor(dialectPrefix));
 		
 		return processors;
 	}

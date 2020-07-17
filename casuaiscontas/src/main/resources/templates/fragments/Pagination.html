@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html 
+    lang="pt" 
+    xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org"
+>
+
+    <th:block th:fragment="pagination (page)">
+        <!-- inicio -->
+
+        <div class="table-responsive-sm  layout-pagination">                        
+            <nav>
+                <ul class="pagination  justify-content-center" th:with="currentPage=${page.currentPage}">
+                  
+                  <li class="page-item" th:classappend="${page.first} ? disabled">
+                    <a class="page-link" th:href="${page.urlToPage(0)}">
+                      Primeira                                      
+                    </a>
+                  </li>
+                  
+                  <li class="page-item" th:classappend="${page.first} ? disabled">
+                    <a class="page-link" th:href="${page.urlToPage(currentPage - 1)}" aria-label="Previous">
+                      <span aria-hidden="true">&laquo;</span>
+                      <span class="sr-only">Previous</span>
+                    </a>
+                  </li>
+                  
+                  <th:block th:each="p : ${#numbers.sequence(page.begin, page.end)}" th:with="pageNumber=${p - 1}">
+                    <li class="page-item" th:classappend="${currentPage == pageNumber} ? active">
+                      <a class="page-link" th:href="${page.urlToPage(pageNumber)}">[[${p}]]</a>
+                    </li>
+                  </th:block>
+                                                    
+                  <li class="page-item" th:classappend="${page.last} ? disabled">
+                    <a class="page-link" th:href="${page.urlToPage(currentPage + 1)}" aria-label="Next">
+                      <span aria-hidden="true">&raquo;</span>
+                      <span class="sr-only">Next</span>
+                    </a>
+                  </li>
+                  
+                  <li class="page-item" th:classappend="${page.last} ? disabled">
+                    <a class="page-link" th:href="${page.urlToPage(page.totalPages - 1)}">
+                      Última
+                    </a>
+                  </li>                                  
+
+                </ul>
+              </nav>
+        </div>
+
+        <!-- fim -->
+    </th:block>
+
+</html>

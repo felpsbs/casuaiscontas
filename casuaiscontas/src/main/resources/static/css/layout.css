@@ -57,7 +57,7 @@
 }
 
 .layout-pagination {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .js-tooltip:first-child {
@@ -74,6 +74,6 @@
 
 @media(max-width: 576px) {
     .layout-pagination {
-        margin: 10px 0;
+        margin: 20px 0;
     }
 }

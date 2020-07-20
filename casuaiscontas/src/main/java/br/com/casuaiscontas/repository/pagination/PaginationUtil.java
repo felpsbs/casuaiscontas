@@ -38,7 +38,7 @@ public class PaginationUtil {
 			String propString = sortOrder.getProperty();
 
 			Order order = sortOrder.isAscending() ? builder.asc(fromEntity.get(propString))
-					: builder.asc(fromEntity.get(propString));
+					: builder.desc(fromEntity.get(propString));
 
 			query.orderBy(order);
 		}

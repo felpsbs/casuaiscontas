@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html 
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:th="http://www.thymeleaf.org"
+>
+
+    <th:block th:fragment="order (page, propertie, text)">
+      <a th:href="${page.urlOrder(propertie)}" th:remove="${page.empty} ? tag">
+        <span th:text="${text}">Nome d campo</span>          
+        <span class="dropup" th:remove="${page.isDesc(propertie)} ? tag">
+          <span class="dropdown-toggle"></span>
+        </span>
+      </a>
+    </th:block>
+
+</html>

@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html 
-    lang="pt" 
-    xmlns="http://www.w3.org/1999/xhtml" 
-	xmlns:th="http://www.thymeleaf.org"
+  xmlns="http://www.w3.org/1999/xhtml" 
+  xmlns:th="http://www.thymeleaf.org"
 >
 
     <th:block th:fragment="pagination (page)">
-        <!-- inicio -->
-
         <div class="table-responsive-sm  layout-pagination">                        
             <nav>
                 <ul class="pagination  justify-content-center" th:with="currentPage=${page.currentPage}">
@@ -47,8 +44,6 @@
                 </ul>
               </nav>
         </div>
-
-        <!-- fim -->
     </th:block>
 
 </html>

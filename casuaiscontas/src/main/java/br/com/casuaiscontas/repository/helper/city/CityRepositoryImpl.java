@@ -54,8 +54,7 @@ public class CityRepositoryImpl implements CityQueries {
 		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
 		CriteriaQuery<City> query = criteriaBuilder.createQuery(City.class);
 
-		Root<City> root = query.from(City.class);
-
+		Root<City> root = query.from(City.class);	
 		root.join("state", JoinType.LEFT);
 		
 		query.select(root).distinct(true);
@@ -83,7 +82,7 @@ public class CityRepositoryImpl implements CityQueries {
 		
 		if(filter != null) {
 			if(!StringUtils.isEmpty(filter.getName())) {
-				predicateList.add(builder.like(cityEntity.get("name"), "%" + filter.getName()));
+				predicateList.add(builder.like(cityEntity.get("name"), "%" + filter.getName() + "%"));
 			}
 			
 			if(filter.getState() != null) {

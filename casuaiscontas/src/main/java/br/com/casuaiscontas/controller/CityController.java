@@ -11,6 +11,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -65,6 +66,7 @@ public class CityController {
 		return new ModelAndView("redirect:/cidades/nova");
 	}
 	
+	@PreAuthorize("hasRole('ROLE_CADASTRAR_CIDADE')")
 	@GetMapping
 	public ModelAndView search(CityFilter cityFilter, BindingResult result, @PageableDefault(size = 5) Pageable pageable, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("city/SearchCity");

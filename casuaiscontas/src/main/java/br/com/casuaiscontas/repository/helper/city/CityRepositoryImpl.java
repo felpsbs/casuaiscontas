@@ -51,14 +51,14 @@ public class CityRepositoryImpl implements CityQueries {
 	
 	@Override
 	public Optional<City> findCityWithState(Long id) {
-		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-		CriteriaQuery<City> query = criteriaBuilder.createQuery(City.class);
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<City> query = builder.createQuery(City.class);
 
 		Root<City> root = query.from(City.class);	
 		root.join("state", JoinType.LEFT);
 		
 		query.select(root).distinct(true);
-		query.where(criteriaBuilder.equal(root.get("id"), id));
+		query.where(builder.equal(root.get("id"), id));
 
 		TypedQuery<City> typedQuery = manager.createQuery(query);
 
@@ -66,11 +66,11 @@ public class CityRepositoryImpl implements CityQueries {
 	}
 	
 	private Long total(CityFilter cityFilter) {
-		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-		CriteriaQuery<Long> query = criteriaBuilder.createQuery(Long.class);
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<Long> query = builder.createQuery(Long.class);
 		Root<City> cityEntity = query.from(City.class);
 		
-		query.select(criteriaBuilder.count(cityEntity));
+		query.select(builder.count(cityEntity));
 		query.where(addFilter(cityFilter, cityEntity));
 		
 		return manager.createQuery(query).getSingleResult();

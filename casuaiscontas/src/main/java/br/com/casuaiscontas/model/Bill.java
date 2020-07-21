@@ -139,5 +139,9 @@ public class Bill extends BaseModel{
 	public BigDecimal getTotal() {		
 		return price.multiply(new BigDecimal(quantity));
 	}
+	
+	public boolean isPayed() {
+		return this.status.equals(BillStatus.PAYED);
+	}
 
 }

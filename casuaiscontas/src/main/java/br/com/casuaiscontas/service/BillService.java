@@ -1,11 +1,15 @@
 package br.com.casuaiscontas.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casuaiscontas.model.Bill;
+import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.BillRepository;
+import br.com.casuaiscontas.repository.filter.BillFilter;
 import br.com.casuaiscontas.security.SystemUser;
 import br.com.casuaiscontas.service.exception.BillNotFoundException;
 
@@ -33,6 +37,10 @@ public class BillService {
 
 	public Bill findById(Long id) {
 		return repository.findById(id).orElseThrow(() -> new BillNotFoundException("Conta não encontrada"));
+	}
+
+	public Page<Bill> filter(BillFilter billFilter, Pageable pageable, User user) {
+		return repository.filter(billFilter, pageable, user);
 	}
 
 }

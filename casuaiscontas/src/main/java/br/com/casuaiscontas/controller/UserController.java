@@ -34,7 +34,7 @@ public class UserController {
 	private GroupService groupService;
 
 	@GetMapping("/novo")
-	public ModelAndView registerForm(User testarUsuario) {
+	public ModelAndView registerForm(User user) {
 		ModelAndView mv = new ModelAndView("user/RegisterUser");
 		mv.addObject("states", stateService.findAll());
 		mv.addObject("grupos", groupService.findAll());

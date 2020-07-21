@@ -1,8 +1,11 @@
 package br.com.casuaiscontas.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -14,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.casuaiscontas.controller.page.PageWrapper;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.BillStatus;
+import br.com.casuaiscontas.repository.filter.BillFilter;
 import br.com.casuaiscontas.security.SystemUser;
 import br.com.casuaiscontas.service.BillService;
 
@@ -44,8 +49,7 @@ public class BillController {
 		attr.addFlashAttribute("success", true);
 		attr.addFlashAttribute("message", "Operação realizada com sucesso");
 		return new ModelAndView("redirect:/contas/nova");
-	}
-	
+	}	
 	
 	@PreAuthorize("#userId == principal.user.id")
 	@GetMapping("/{userId}/{billId}")
@@ -54,6 +58,17 @@ public class BillController {
 		ModelAndView mv = registerForm(bill);
 		mv.addObject(bill);
 		return mv;
+	}
+	
+	@PreAuthorize("#userId == principal.user.id")
+	@GetMapping("/{userId}")
+	public ModelAndView search(BillFilter billFilter, BindingResult result, @PageableDefault(size = 5) Pageable pageable, 
+			HttpServletRequest request, @AuthenticationPrincipal SystemUser user, @PathVariable Long userId)  {
+		
+		ModelAndView mv = new ModelAndView("bill/SearchBill");
+		mv.addObject("allStatus", BillStatus.values());
+		mv.addObject("page", new PageWrapper<>(service.filter(billFilter, pageable, user.getUser()), request));
+		return mv;		
 	}
 	
 }

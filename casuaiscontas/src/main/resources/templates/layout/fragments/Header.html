@@ -22,7 +22,7 @@
                     <div class="collapse  navbar-collapse  header__menu" id="menu" sec:authorize="isAuthenticated()">
                         <ul class="navbar-nav  mr-auto">
                             <li class="nav-item" th:unless="${#authorization.expression('hasRole(''ROLE_CADASTRAR_USUARIO'')')}">
-                                <a th:href="@{/contas/nova}" class="nav-link">Contas</a>
+                                <a th:href="@{/contas/{id}(id=${#authentication.principal.user.id})}" class="nav-link">Contas</a>
                             </li>
                             <li class="nav-item" th:unless="${#authorization.expression('hasRole(''ROLE_CADASTRAR_USUARIO'')')}">
                                 <a href="#" class="nav-link">Despesas</a>

@@ -32,7 +32,7 @@ public class OrderElementTagProcessor extends AbstractElementTagProcessor {
 		model.add(modelFactory.createStandaloneElementTag(
 				"th:block", 
 				"th:replace", 
-				String.format("fragments/Order :: order (%s, %s, %s)", page.getValue(), field.getValue(), text.getValue())
+				String.format("fragments/Order :: order (%s, %s, '%s')", page.getValue(), field.getValue(), text.getValue())
 		));	
 		
 		structureHandler.replaceWith(model, true);

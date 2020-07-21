@@ -1,8 +1,11 @@
 package br.com.casuaiscontas.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -13,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import br.com.casuaiscontas.controller.page.PageWrapper;
 import br.com.casuaiscontas.model.User;
+import br.com.casuaiscontas.repository.filter.UserFilter;
 import br.com.casuaiscontas.service.GroupService;
 import br.com.casuaiscontas.service.StateService;
 import br.com.casuaiscontas.service.UserService;
@@ -70,6 +75,15 @@ public class UserController {
 		mv.addObject(user);
 		return mv;
 	}
+	
+	@PreAuthorize("hasRole('ROLE_CADASTRAR_USUARIO')")
+	@GetMapping
+	public ModelAndView search(UserFilter userFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("user/SearchUser");
+		mv.addObject("grupos", groupService.findAll());
+		mv.addObject("page", new PageWrapper<>(userService.filter(userFilter, pageable), request));
+		return mv;
+	}	
 	
 	private String successMessage(User user) {
 		return user.isNew() ? "Cadastro realizado com sucesso, verifique seu e-mail!" : "Operação realizada com sucesso"; 

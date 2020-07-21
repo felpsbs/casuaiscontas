@@ -30,7 +30,7 @@
                             <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
                                 <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Admin</a>                                
                                 <div class="dropdown-menu  dropdown-menu" aria-labelledby="navbarDropdown">                                                                      
-                                    <a class="dropdown-item" href="#">Usuários</a> 
+                                    <a class="dropdown-item" th:href="@{/usuarios}">Usuários</a> 
                                     <div class="dropdown-divider"></div>                                                                  
                                     <a th:href="@{/cidades}" class="dropdown-item">Cidades</a>                                                                   
                                 </div>

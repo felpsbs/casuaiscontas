@@ -3,12 +3,15 @@ package br.com.casuaiscontas.service;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.UserRepository;
+import br.com.casuaiscontas.repository.filter.UserFilter;
 import br.com.casuaiscontas.service.exception.CpfAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.EmailAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.UserNotFoundException;
@@ -42,6 +45,10 @@ public class UserService {
 	
 	public User findUserWithGroups(Long id) {
 		return repository.findUserWithGroups(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));		
+	}
+	
+	public Page<User> filter(UserFilter userFilter, Pageable pageable) {
+		return repository.filter(userFilter, pageable);
 	}
 
 	private void encodePassword(User user) {

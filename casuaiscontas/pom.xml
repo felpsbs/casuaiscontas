@@ -23,7 +23,7 @@
 		<java.version>1.8</java.version>
 		
 		<!-- Apache Commons BeanUtils -->
-		<commons-beatils.version>1.9.3</commons-beatils.version>		
+		<commons-beatils.version>1.9.3</commons-beatils.version>					
 				
 	</properties>
 
@@ -75,6 +75,11 @@
 		<dependency>
 		    <groupId>org.thymeleaf.extras</groupId>
 		    <artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.github.mxab.thymeleaf.extras</groupId>
+		    <artifactId>thymeleaf-extras-data-attribute</artifactId>		    
 		</dependency>
 		
 		<!-- JPA -->

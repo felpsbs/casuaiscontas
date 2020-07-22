@@ -6,7 +6,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Sort.Order;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class PageWrapper<T> {
@@ -16,8 +15,8 @@ public class PageWrapper<T> {
 	private UriComponentsBuilder uriBuilder;
 	
 	public PageWrapper(Page<T> page, HttpServletRequest request) {
-		this.page = page;
-		this.uriBuilder = ServletUriComponentsBuilder.fromRequest(request);
+		this.page = page;				
+		this.uriBuilder = this.formatUrl(request); 
 	}
 	 
 	public List<T> getContent() {
@@ -40,7 +39,11 @@ public class PageWrapper<T> {
 		return page.isLast();
 	}
 	
-	public int getTotalPages() {
+	public int getTotalElements() {
+		return page.getNumberOfElements();
+	}
+	
+	public int getTotalPages() {		
 		return page.getTotalPages();
 	}
 	
@@ -68,7 +71,7 @@ public class PageWrapper<T> {
 	public String invertDirection(String propertie) {
 		String direction = "asc";
 		
-		Order order = this.page.getSort() != null ? page.getSort().getOrderFor(propertie) : null;
+		Order order = this.page.getSort() != null ? this.page.getSort().getOrderFor(propertie) : null;
 		if(order != null) {
 			direction = order.isAscending() ? "desc" : direction;
 		}
@@ -78,6 +81,15 @@ public class PageWrapper<T> {
 	
 	public boolean isDesc(String propertie) {
 		return this.invertDirection(propertie).equals("asc");
+	}
+	
+	private UriComponentsBuilder formatUrl(HttpServletRequest request) {
+		String queryString = request.getQueryString();
+		String httpUrl = request.getRequestURL()
+				.append(queryString != null ? String.format("?%s", queryString) : "")
+				.toString().replaceAll("deleted", "");
+		
+		return UriComponentsBuilder.fromHttpUrl(httpUrl);
 	}
 	
 }

@@ -43,4 +43,9 @@ public class BillService {
 		return repository.filter(billFilter, pageable, user);
 	}
 
+	@Transactional
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+
 }

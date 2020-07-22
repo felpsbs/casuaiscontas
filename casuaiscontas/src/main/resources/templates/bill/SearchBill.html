@@ -5,6 +5,7 @@
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/BaseLayout}"
     xmlns:casuaiscontas="http://casuaiscontas.com"
+    xmlns:data="http://www.thymeleaf.org/extras/data"
 >
     <head>
 
@@ -109,8 +110,12 @@
                                         <span class="badge" th:text="${bill.status.description}" th:classappend="${bill.payed ? 'badge-success' : 'badge-danger'}">Paga</span> 
                                     </td>
                                     <td>                                    
-                                        <a th:href="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}" class="js-tooltip" title="Editar"><span class="fa fa-pencil" aria-hidden="true"></span></a>   
-                                        <a href="#" class="js-tooltip" title="Excluir"><span class="fa fa-trash" aria-hidden="true"></span></a>                                                    
+                                        <a th:href="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}" class="js-tooltip" title="Editar">
+                                            <span class="fa fa-pencil" aria-hidden="true"></span>
+                                        </a>   
+                                        <a href="#" class="js-tooltip  js-delete" title="Excluir" data:object="${bill.name}" data:url="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}">
+                                            <span class="fa fa-trash" aria-hidden="true"></span>
+                                        </a>                                                    
                                     </td>
                                   </tr>  
                                   <tr class="text-center" th:if="${page.empty}">

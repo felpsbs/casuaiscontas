@@ -67,7 +67,7 @@ public class BillController {
 	
 	@PreAuthorize("#userId == principal.user.id")
 	@GetMapping("/{userId}")
-	public ModelAndView search(BillFilter billFilter, BindingResult result, @PageableDefault(size = 1) Pageable pageable, 
+	public ModelAndView search(BillFilter billFilter, BindingResult result, @PageableDefault(size = 5) Pageable pageable, 
 			HttpServletRequest request, @AuthenticationPrincipal SystemUser user, @PathVariable Long userId)  {
 		
 		ModelAndView mv = new ModelAndView("bill/SearchBill");

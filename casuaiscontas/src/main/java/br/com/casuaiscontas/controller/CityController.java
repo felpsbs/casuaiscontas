@@ -11,9 +11,11 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -87,6 +89,13 @@ public class CityController {
 	@RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
 	public @ResponseBody List<City> findCitiesByState(@RequestParam(name = "state", defaultValue = "-1") Long stateId) {
 		return cityService.findByState(stateId);
+	}
+	
+	@PreAuthorize("hasRole('ROLE_CADASTRAR_CIDADE')")
+	@DeleteMapping("/{id}")
+	public @ResponseBody ResponseEntity<?> delete(@PathVariable("id") City city) {
+		cityService.delete(city);						
+		return ResponseEntity.ok().build();
 	}
 	
 }

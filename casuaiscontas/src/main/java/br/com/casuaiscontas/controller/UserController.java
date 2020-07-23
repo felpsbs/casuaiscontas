@@ -78,7 +78,7 @@ public class UserController {
 	
 	@PreAuthorize("hasRole('ROLE_CADASTRAR_USUARIO')")
 	@GetMapping
-	public ModelAndView search(UserFilter userFilter, BindingResult result, @PageableDefault(size = 2) Pageable pageable, HttpServletRequest request) {
+	public ModelAndView search(UserFilter userFilter, BindingResult result, @PageableDefault(size = 5) Pageable pageable, HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("user/SearchUser");
 		mv.addObject("grupos", groupService.findAll());
 		mv.addObject("page", new PageWrapper<>(userService.filter(userFilter, pageable), request));

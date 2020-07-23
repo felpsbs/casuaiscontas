@@ -30,7 +30,7 @@ CasuaisContas.DeleteDialog = (function() {
         }
         swal(options).then(willDelete => {
             if(willDelete) {        
-                onDeleteConfirm(url);
+                onDeleteConfirm(url);                
             }
         });
     }
@@ -39,7 +39,7 @@ CasuaisContas.DeleteDialog = (function() {
         $.ajax({
             url: url,
             method: 'DELETE',
-            success: onSuccessDelete,
+            success: onSuccessDelete.bind(this),
             error: onErrorDelete
         })        
     }
@@ -48,7 +48,7 @@ CasuaisContas.DeleteDialog = (function() {
         let currentUrl = window.location.href;
         let separator = currentUrl.indexOf('?') > -1 ? '&' : '?';
         let newUrl = currentUrl;
-
+        
         let isLastPage = $('#lastPage').val();
         let currentPage = $('#currentPage').val();
         let numberOfElements = $('#numberOfElements').val();
@@ -61,7 +61,7 @@ CasuaisContas.DeleteDialog = (function() {
     }
 
     function onErrorDelete(e) {
-        swal(`Oops! ${e.responseText}.`, { icon: "error" });  
+        swal(`Oops! ${e.responseText}`, { title: 'Oops!', icon: 'error' });  
     }
 
     return DeleteDialog;
@@ -70,5 +70,5 @@ CasuaisContas.DeleteDialog = (function() {
 
 $(function() {
     var deleteDialog = new CasuaisContas.DeleteDialog();
-    deleteDialog.start();
+    deleteDialog.start();    
 });

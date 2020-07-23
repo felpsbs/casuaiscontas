@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,7 @@ import br.com.casuaiscontas.repository.CityRepository;
 import br.com.casuaiscontas.repository.filter.CityFilter;
 import br.com.casuaiscontas.service.exception.CityAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.CityNotFoundException;
+import br.com.casuaiscontas.service.exception.EntityBeenUsedException;
 
 @Service
 public class CityService {
@@ -41,6 +43,16 @@ public class CityService {
 	
 	public Page<City> filter(CityFilter cityFilter, Pageable pageable) {
 		return repository.filter(cityFilter, pageable);
+	}
+
+	@Transactional
+	public void delete(City city) {
+		try {
+			repository.delete(city);	
+			repository.flush();
+		} catch (DataIntegrityViolationException e) {
+			throw new EntityBeenUsedException("Essa cidade não pode ser excluída pois existem transações que dependem dela.");
+		}	
 	}
 }
   

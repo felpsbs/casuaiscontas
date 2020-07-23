@@ -61,7 +61,7 @@ public class PageWrapper<T> {
 		return page.hasContent();
 	}
 	
-	public int getTotalOfElements() {
+	public int getNumberOfElements() {
 		return page.getNumberOfElements();
 	}
 		

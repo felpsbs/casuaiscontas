@@ -51,10 +51,18 @@ public class PageWrapper<T> {
 	public int getBegin() {
 		return Math.max(1,  (this.getCurrentPage() - PAGES_LIMIT) + 1);
 	}
-
+	
 	// last element
 	public int getEnd() {
 		return this.getTotalPages() < PAGES_LIMIT ? this.getTotalPages() : this.getBegin() + PAGES_LIMIT;		
+	}
+	
+	public boolean hasContent() {		
+		return page.hasContent();
+	}
+	
+	public int getTotalOfElements() {
+		return page.getNumberOfElements();
 	}
 		
 	public String urlToPage(int page) {

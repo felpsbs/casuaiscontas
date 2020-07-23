@@ -5,7 +5,14 @@
 >
 
     <th:block th:fragment="pagination (page)">
-        <div class="table-responsive-sm  layout-pagination">                        
+      
+      
+      <div class="table-responsive-sm  layout-pagination" th:if="${page.hasContent()}">    
+
+            <input type="hidden" id="lastPage" th:value="${page.last}">
+            <input type="hidden" id="currentPage" th:value="${page.currentPage}">
+            <input type="hidden" id="numberOfElements" th:value="${page.totalOfElements}">
+        
             <nav>
                 <ul class="pagination  justify-content-center" th:with="currentPage=${page.currentPage}">
                   

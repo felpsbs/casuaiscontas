@@ -47,9 +47,17 @@ CasuaisContas.DeleteDialog = (function() {
     function onSuccessDelete() {         
         let currentUrl = window.location.href;
         let separator = currentUrl.indexOf('?') > -1 ? '&' : '?';
-        let newUrl = currentUrl.indexOf('deleted') > -1 ? currentUrl : `${currentUrl}${separator}deleted`;
+        let newUrl = currentUrl;
 
-        window.location = newUrl;
+        let isLastPage = $('#lastPage').val();
+        let currentPage = $('#currentPage').val();
+        let numberOfElements = $('#numberOfElements').val();
+
+        if(isLastPage && numberOfElements == 1 && currentPage != 0) {
+            newUrl = currentUrl.replace(currentUrl.match('page=\\d'), `page=${currentPage - 1}`);
+        }
+
+        window.location = currentUrl.indexOf('deleted') > -1 ? currentUrl : `${newUrl}${separator}deleted`;
     }
 
     function onErrorDelete(e) {

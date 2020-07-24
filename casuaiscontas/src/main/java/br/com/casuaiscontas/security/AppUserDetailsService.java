@@ -15,24 +15,24 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import br.com.casuaiscontas.model.User;
-import br.com.casuaiscontas.repository.UserRepository;
+import br.com.casuaiscontas.service.UserService;
 
 @Service
 public class AppUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserRepository repository;
+	private UserService service;
 	
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		Optional<User> userOptional = repository.byEmailAndActive(email);
+		Optional<User> userOptional = service.findByEmailAndActive(email);
 		User user = userOptional.orElseThrow(() -> new UsernameNotFoundException("E-mail/Senha inválidos"));
 		return new SystemUser(user, getPermitions(user));
 	}
 
 	private Collection<? extends GrantedAuthority> getPermitions(User user) {
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
-		List<String> permitions = repository.findPermitions(user);
+		List<String> permitions = service.findPermitions(user);
 		permitions.forEach(p -> authorities.add(new SimpleGrantedAuthority(p.toUpperCase())));
 		return authorities;
 	}

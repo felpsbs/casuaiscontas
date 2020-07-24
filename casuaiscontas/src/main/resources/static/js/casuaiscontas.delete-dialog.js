@@ -39,7 +39,7 @@ CasuaisContas.DeleteDialog = (function() {
         $.ajax({
             url: url,
             method: 'DELETE',
-            success: onSuccessDelete.bind(this),
+            success: onSuccessDelete,
             error: onErrorDelete
         })        
     }

@@ -69,8 +69,8 @@ public class UserRepositoryImpl implements UserQueries {
 
 	@Override
 	public Optional<User> findUserWithGroups(Long id) {
-		CriteriaBuilder criteriaBuilder = manager.getCriteriaBuilder();
-		CriteriaQuery<User> query = criteriaBuilder.createQuery(User.class);
+		CriteriaBuilder builder = manager.getCriteriaBuilder();
+		CriteriaQuery<User> query = builder.createQuery(User.class);
 
 		Root<User> root = query.from(User.class);
 
@@ -80,7 +80,7 @@ public class UserRepositoryImpl implements UserQueries {
 		city.join("state", JoinType.LEFT);
 
 		query.select(root).distinct(true);
-		query.where(criteriaBuilder.equal(root.get("id"), id));
+		query.where(builder.equal(root.get("id"), id));
 
 		TypedQuery<User> typedQuery = manager.createQuery(query);
 

@@ -1,5 +1,6 @@
 package br.com.casuaiscontas.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,6 +50,14 @@ public class UserService {
 	
 	public Page<User> filter(UserFilter userFilter, Pageable pageable) {
 		return repository.filter(userFilter, pageable);
+	}
+	
+	public Optional<User> findByEmailAndActive(String email) {
+		return repository.byEmailAndActive(email);
+	}
+	
+	public List<String> findPermitions(User user) {
+		return repository.findPermitions(user);
 	}
 
 	private void encodePassword(User user) {

@@ -52,7 +52,7 @@ public class User extends BaseModel {
 	@NotNull
 	private LocalDate birthdate;
 
-	private boolean active;
+	private Boolean active;
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDate createdAt;
@@ -70,7 +70,7 @@ public class User extends BaseModel {
 
 	@PrePersist
 	public void onSave() {
-		active = false;
+		active = Boolean.FALSE;
 		createdAt = LocalDate.now();
 	}
 
@@ -120,11 +120,11 @@ public class User extends BaseModel {
 		this.cpf = cpf;
 	}
 
-	public boolean getActive() {
+	public Boolean getActive() {
 		return active;
 	}
 
-	public void setActive(boolean active) {
+	public void setActive(Boolean active) {
 		this.active = active;
 	}
 

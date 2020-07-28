@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casuaiscontas.model.User;
+import br.com.casuaiscontas.model.UserStatus;
 import br.com.casuaiscontas.repository.UserRepository;
 import br.com.casuaiscontas.repository.filter.UserFilter;
 import br.com.casuaiscontas.service.exception.CpfAlreadyExistsException;
@@ -44,6 +45,15 @@ public class UserService {
 		repository.save(user);
 	}
 	
+	@Transactional
+	public void updateStatus(Long[] ids, UserStatus userStatus) {
+		userStatus.update(ids, this);
+	}
+	
+	public void updateStatus(Long[] ids, boolean status) {
+		repository.findByIdIn(ids).forEach(u -> u.setActive(status));
+	}
+	
 	public User findUserWithGroups(Long id) {
 		return repository.findUserWithGroups(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));		
 	}
@@ -59,7 +69,7 @@ public class UserService {
 	public List<String> findPermitions(User user) {
 		return repository.findPermitions(user);
 	}
-
+	
 	private void encodePassword(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 	}

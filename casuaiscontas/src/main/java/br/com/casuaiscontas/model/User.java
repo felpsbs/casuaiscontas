@@ -159,5 +159,9 @@ public class User extends BaseModel {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
+	
+	public String getStatusName() {
+		return this.active ? "Ativo" : "Inativo";
+	}
 
 }

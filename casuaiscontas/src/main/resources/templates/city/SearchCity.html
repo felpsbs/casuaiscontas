@@ -63,12 +63,12 @@
                                 <tbody>
                                   <tr th:each="city : ${page.content}">                             
                                     <td th:text="${city.name}">Goiânia</td>                                
-                                    <td th:text="${city.state.name}">Goiás</td>
+                                    <td th:text="${city.state.name}">Goiás</td> 
                                     <td>                                    
-                                        <a th:href="@{/cidades/{id}(id=${city.id})}" class="js-tooltip" title="Editar">
+                                        <a th:href="@{/cidades/{id}(id=${city.id})}" class="js-tooltip  js-actions" title="Editar">
                                             <span class="fa fa-pencil" aria-hidden="true"></span>
                                         </a>   
-                                        <a href="#" class="js-tooltip js-delete" title="Excluir" data:object="|${city.name} - ${city.state.name}|" data:url="@{/cidades/{id}(id=${city.id})}">
+                                        <a href="#" class="js-tooltip js-delete  js-actions" title="Excluir" data:object="|${city.name} - ${city.state.name}|" data:url="@{/cidades/{id}(id=${city.id})}">
                                             <span class="fa fa-trash" aria-hidden="true"></span>
                                         </a>                                                    
                                     </td>

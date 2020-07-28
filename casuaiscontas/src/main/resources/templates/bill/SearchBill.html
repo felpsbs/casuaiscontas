@@ -110,15 +110,15 @@
                                         <span class="badge" th:text="${bill.status.description}" th:classappend="${bill.payed ? 'badge-success' : 'badge-danger'}">Paga</span> 
                                     </td>
                                     <td>                                    
-                                        <a th:href="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}" class="js-tooltip" title="Editar">
+                                        <a th:href="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}" class="js-tooltip  js-actions" title="Editar">
                                             <span class="fa fa-pencil" aria-hidden="true"></span>
                                         </a>   
-                                        <a href="#" class="js-tooltip  js-delete" title="Excluir" data:object="${bill.name}" data:url="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}">
+                                        <a href="#" class="js-tooltip  js-delete  js-actions" title="Excluir" data:object="${bill.name}" data:url="@{/contas/{userId}/{id}(userId=${bill.user.id}, id=${bill.id})}">
                                             <span class="fa fa-trash" aria-hidden="true"></span>
                                         </a>                                                    
                                     </td>
                                   </tr>  
-                                  <tr class="text-center" th:if="${page.empty}">
+                                  <tr class="text-center" th:if="${page.empty}"> 
                                     <td colspan="7">Nenhum resultado encontrado</td>
                                   </tr>                                             
                                 </tbody>

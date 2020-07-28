@@ -60,20 +60,23 @@
     margin-top: 20px;
 }
 
-.js-tooltip:first-child {
-    margin-right: 5px;
-}
-
-.js-tooltip:last-child {
-    color: #FF0000;
-}
-
 .tooltip {
     font-size: 1.4rem;
 }
 
+.js-actions:first-child {
+    margin-right: 5px;
+}
+
+.js-actions:last-child {
+    color: #FF0000;
+}
 @media(max-width: 576px) {
     .layout-pagination {
         margin: 20px 0;
     }
+}
+
+.layout-btns-actions {
+    margin-top: 10px;
 }

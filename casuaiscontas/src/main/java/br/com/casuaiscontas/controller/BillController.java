@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casuaiscontas.controller.page.PageWrapper;
+import br.com.casuaiscontas.dto.BillDto;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.BillStatus;
 import br.com.casuaiscontas.repository.filter.BillFilter;
@@ -82,5 +83,12 @@ public class BillController {
 		service.delete(billId);		
 		return ResponseEntity.ok().build();
 	}
+	
+	@PreAuthorize("#userId == principal.user.id")
+	@GetMapping("/gastos/mes/{userId}")
+	public @ResponseBody BillDto monthlyExpend(@PathVariable Long userId) {
+		return service.findMonthlyExpend(userId);
+	}
+	
 	
 }

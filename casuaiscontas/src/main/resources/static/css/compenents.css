@@ -150,3 +150,25 @@
 .error__button {
     font-size: 2.0rem;
 }
+
+/*---------------------------\*
+    GRAFIC
+\*---------------------------*/
+
+.grafic {
+
+}
+
+.grafic__title {
+    margin-bottom: 30px;
+
+    color: #004b68;
+    font-size: 2.5rem;
+    text-align: center;
+}
+
+@media(max-width: 991px) {
+    .grafic:last-child  {
+        margin-top: 30px;
+    }
+}

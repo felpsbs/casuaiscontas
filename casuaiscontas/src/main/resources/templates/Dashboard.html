@@ -4,6 +4,7 @@
 	xmlns:th="http://www.thymeleaf.org"
     xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="~{layout/BaseLayout}"
+    xmlns:data="http://www.thymeleaf.org/extras/data"
 >
     <head>
 
@@ -17,12 +18,29 @@
             <div class="layout-dashboard">
 
                 <div class="container">
-                    <h2 th:text="|Seja bem-vindo(a) ${#authentication.principal.user.name}|">Seja bem vindo!</h2>
+
+                    <div class="row">
+                        <div class="col-sm-12  col-md-12  col-lg-6  grafic">
+                            <h2 class="grafic__title">Gastos nos últimos 6 meses</h2>
+                            <canvas id="lastSixMonths" height="160" data:url="@{/contas/gastos/mes/{id}(id=${#authentication.principal.user.id})}"></canvas>
+                        </div>
+    
+                        <div class="col-sm-12  col-md-12  col-lg-6  grafic">
+                            <h2 class="grafic__title">Suas contas desse mês</h2>
+                            <canvas id="statusBillGrafic" height="160" data:url="@{/contas/gastos/mes/{id}(id=${#authentication.principal.user.id})}"></canvas>
+                        </div>
+                    </div>
+            
                 </div>
     
             </div>
 
         </section>
+
+        <th:block layout:fragment="js-extra">            
+            <script th:src="@{/js/vendors/Chart.min.js}"></script>
+            <script th:src="@{/js/dashboard.grafic.js}"></script>
+        </th:block>
 
     </body>
 </html>

@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.casuaiscontas.dto.BillDto;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.BillRepository;
@@ -46,6 +47,10 @@ public class BillService {
 	@Transactional
 	public void delete(Long id) {
 		repository.deleteById(id);
+	}
+
+	public BillDto findMonthlyExpend(Long userId) {
+		return repository.findMonthlyExpend(userId).orElse(new BillDto());
 	}
 
 }

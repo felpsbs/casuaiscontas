@@ -5,6 +5,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import br.com.casuaiscontas.dto.BillDto;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.filter.BillFilter;
@@ -15,4 +16,5 @@ public interface BillQueries {
 	
 	Optional<Bill> findBillWithUser(Long id);
 
+	Optional<BillDto> findMonthlyExpend(Long userId);
 }

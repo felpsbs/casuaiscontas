@@ -1,5 +1,6 @@
 package br.com.casuaiscontas.repository.helper.bill;
 
+import java.time.MonthDay;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,7 +21,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import br.com.casuaiscontas.dto.BillDto;
 import br.com.casuaiscontas.model.Bill;
+import br.com.casuaiscontas.model.BillStatus;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.filter.BillFilter;
 import br.com.casuaiscontas.repository.pagination.PaginationUtil;
@@ -32,6 +35,20 @@ public class BillRepositoryImpl implements BillQueries {
 	
 	@Autowired
 	private PaginationUtil paginationUtil;
+	
+	@Override
+	public Optional<BillDto> findMonthlyExpend(Long userId) {
+		String query = "select new br.com.casuaiscontas.dto.BillDto(sum(b.price), " 
+					+ "(select sum(bi.price) from Bill bi where bi.user.id = :userId and bi.status = :notPaid and month(bi.createdAt) = :month)) "
+					+ "from Bill b where b.user.id = :userId and b.status = :paid and month(b.createdAt) = :month";
+		
+		return manager.createQuery(query, BillDto.class)
+				.setParameter("userId", userId)
+				.setParameter("paid", BillStatus.PAID)
+				.setParameter("notPaid", BillStatus.NOT_PAID)
+				.setParameter("month", MonthDay.now().getMonthValue())
+				.getResultList().stream().findFirst();
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
@@ -110,6 +127,5 @@ public class BillRepositoryImpl implements BillQueries {
 		
 		return predicateList.toArray(new Predicate[predicateList.size()]);
 	}
-
 
 }

@@ -2,8 +2,8 @@ package br.com.casuaiscontas.model;
 
 public enum BillStatus {
 
-	PAYED("Paga"), 
-	NOT_PAYED("Não paga");
+	PAID("Paga"), 
+	NOT_PAID("Não paga");
 
 	private String description;
 

@@ -49,7 +49,7 @@ public class Bill extends BaseModel{
 	private LocalDate dueDate;
 
 	@Enumerated(EnumType.STRING)
-	private BillStatus status = BillStatus.NOT_PAYED;
+	private BillStatus status = BillStatus.NOT_PAID;
 
 	@Column(name = "created_at", updatable = false)
 	private LocalDate createdAt;
@@ -141,7 +141,7 @@ public class Bill extends BaseModel{
 	}
 	
 	public boolean isPayed() {
-		return this.status.equals(BillStatus.PAYED);
+		return this.status.equals(BillStatus.PAID);
 	}
 
 }

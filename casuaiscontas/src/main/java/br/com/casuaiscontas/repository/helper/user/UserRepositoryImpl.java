@@ -56,15 +56,13 @@ public class UserRepositoryImpl implements UserQueries {
 
 	@Override
 	public Optional<User> byEmailAndActive(String email) {
-		return manager.createQuery("from User where lower(email) = lower(:email) and active = true", User.class)
+		return manager.createQuery("FROM User WHERE LOWER(email) = LOWER(:email) AND active = true", User.class)
 				.setParameter("email", email).getResultList().stream().findFirst();
 	}
 
 	@Override
 	public List<String> findPermitions(User user) {
-		return manager.createQuery(
-				"select distinct p.name from User u inner join u.groups g inner join g.permitions p where u = :user",
-				String.class).setParameter("user", user).getResultList();
+		return manager.createNamedQuery("User.findPermitions", String.class).setParameter("user", user).getResultList();
 	}
 
 	@Override

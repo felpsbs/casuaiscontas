@@ -1,19 +1,36 @@
 var CasuaisContas = CasuaisContas || {};
 
-CasuaisContas.LastSixMonethsGrafic = (function() {
+CasuaisContas.MonthlyExpense = (function() {
 
-    function LastSixMonethsGrafic() {
-        this.ctx = $('#lastSixMonths')[0].getContext('2d');
+    function MonthlyExpense() {
+        this.grafic = $('#monthlyExpense'); 
+        this.ctx = this.grafic[0].getContext('2d');
     }
 
-    LastSixMonethsGrafic.prototype.start = function() {
+    MonthlyExpense.prototype.start = function() {
+        $.ajax({
+			url: this.grafic.data('url'),
+			method: 'GET',
+			success: onSuccessData.bind(this)
+        })
+    }
+
+    function onSuccessData(response) {
+        let labels = [];
+        let data = []
+
+        response.forEach(e => {
+            labels.unshift(e.month);
+            data.unshift(e.expense);
+        });
+
         var myChart = new Chart(this.ctx, {
             type: 'bar',
             data: {
-                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
+                labels,
                 datasets: [{
                     label: 'Gastos no mês R$',
-                    data: [1500.99, 800, 35.90, 100, 400, 956.90],
+                    data,
                     backgroundColor: [
                         'rgba(255, 99, 132, 0.2)',
                         'rgba(54, 162, 235, 0.2)',
@@ -45,18 +62,18 @@ CasuaisContas.LastSixMonethsGrafic = (function() {
         });
     }
 
-    return LastSixMonethsGrafic;
+    return MonthlyExpense;
 
 })();
 
-CasuaisContas.StatusBillGrafic = (function() {
+CasuaisContas.MonthExpense = (function() {
 
-    function StatusBillGrafic() {
-        this.grafic = $('#statusBillGrafic');
+    function MonthExpense() {
+        this.grafic = $('#monthExpense');
         this.ctx = this.grafic[0].getContext('2d');
     }
 
-    StatusBillGrafic.prototype.start = function() {
+    MonthExpense.prototype.start = function() {
         $.ajax({
 			url: this.grafic.data('url'),
 			method: 'GET',
@@ -86,14 +103,14 @@ CasuaisContas.StatusBillGrafic = (function() {
         });
     }
 
-    return StatusBillGrafic;
+    return MonthExpense;
 
 })();
 
 $(function() {
-    var lastSixMonethsGrafic = new CasuaisContas.LastSixMonethsGrafic();
-    lastSixMonethsGrafic.start();
+    var monthlyExpense = new CasuaisContas.MonthlyExpense();
+    monthlyExpense.start();
 
-    var statusBillGrafic = new CasuaisContas.StatusBillGrafic();
-    statusBillGrafic.start();
+    var monthExpense = new CasuaisContas.MonthExpense();
+    monthExpense.start();
 });

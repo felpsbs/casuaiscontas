@@ -1,5 +1,7 @@
 package br.com.casuaiscontas.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
@@ -21,7 +23,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casuaiscontas.controller.page.PageWrapper;
-import br.com.casuaiscontas.dto.BillDto;
+import br.com.casuaiscontas.dto.bill.BillDto;
+import br.com.casuaiscontas.dto.bill.BillMonthlyExpense;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.BillStatus;
 import br.com.casuaiscontas.repository.filter.BillFilter;
@@ -86,9 +89,14 @@ public class BillController {
 	
 	@PreAuthorize("#userId == principal.user.id")
 	@GetMapping("/gastos/mes/{userId}")
-	public @ResponseBody BillDto monthlyExpend(@PathVariable Long userId) {
-		return service.findMonthlyExpend(userId);
+	public @ResponseBody BillDto monthExpense(@PathVariable Long userId) {
+		return service.findMonthExpense(userId);
 	}
 	
+	@PreAuthorize("#userId == principal.user.id")
+	@GetMapping("/gastos/{userId}")
+	public @ResponseBody List<BillMonthlyExpense> monthlyExpense(@PathVariable Long userId) {
+		return service.findMonthlyExpense(userId);
+	}
 	
 }

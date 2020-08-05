@@ -1,12 +1,15 @@
 package br.com.casuaiscontas.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.casuaiscontas.dto.BillDto;
+import br.com.casuaiscontas.dto.bill.BillDto;
+import br.com.casuaiscontas.dto.bill.BillMonthlyExpense;
 import br.com.casuaiscontas.model.Bill;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.BillRepository;
@@ -49,8 +52,12 @@ public class BillService {
 		repository.deleteById(id);
 	}
 
-	public BillDto findMonthlyExpend(Long userId) {
-		return repository.findMonthlyExpend(userId).orElse(new BillDto());
+	public BillDto findMonthExpense(Long userId) {
+		return repository.findMonthExpense(userId).orElse(new BillDto());
+	}
+	
+	public List<BillMonthlyExpense> findMonthlyExpense(Long userId) {
+		return repository.findMonthlyExpense(userId);
 	}
 
 }

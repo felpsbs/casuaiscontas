@@ -1,35 +1,35 @@
-package br.com.casuaiscontas.dto;
+package br.com.casuaiscontas.dto.bill;
 
 import java.math.BigDecimal;
 
 public class BillDto {
 
-	private BigDecimal paid;
-	private BigDecimal notPaid;
+	private BigDecimal paidExpense;
+	private BigDecimal notPaidExpense;
 	
 	public BillDto() {
 		
 	}
 	
 	public BillDto(BigDecimal paid, BigDecimal notPaid) {
-		this.paid = paid;
-		this.notPaid = notPaid;
+		this.paidExpense = paid;
+		this.notPaidExpense = notPaid;
 	}
 
 	public BigDecimal getPaid() {
-		return paid;
+		return paidExpense;
 	}
 
 	public void setPaid(BigDecimal paid) {
-		this.paid = paid;
+		this.paidExpense = paid;
 	}
 
 	public BigDecimal getNotPaid() {
-		return notPaid;
+		return notPaidExpense;
 	}
 
 	public void setNotPaid(BigDecimal notPaid) {
-		this.notPaid = notPaid;
+		this.notPaidExpense = notPaid;
 	}
 
 }

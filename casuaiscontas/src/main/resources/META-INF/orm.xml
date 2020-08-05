@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0" xmlns="http://java.sun.com/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm
+        http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+
+    <!-- **************** USER **************** -->
+    
+    <named-query name="User.findPermitions">
+        <query>
+           SELECT distinct p.name FROM User u INNER JOIN u.groups g INNER JOIN g.permitions p WHERE u = :user
+        </query>
+    </named-query>
+
+    <!-- **************** BILL **************** -->
+   
+    <!--Gastos do mês atual-->
+    <named-query name="Bill.findMonthExpense">
+        <query>
+            SELECT 
+                new br.com.casuaiscontas.dto.bill.BillDto(
+                    SUM(b.price), 
+                    (SELECT SUM(price) FROM Bill WHERE user.id = :userId AND status = 'NOT_PAID' AND MONTH(createdAt) = MONTH(NOW()))
+                ) 
+            FROM Bill b 
+            WHERE user.id = :userId 
+                AND status = 'PAID' 
+                AND MONTH(createdAt) = MONTH(NOW())
+        </query>
+    </named-query>
+
+    <!--Gastos nos últimos 6 meses-->
+    <named-native-query name="Bill.findMonthlyExpense" result-set-mapping="findMonthlyExpenseMapping">
+        <query>
+            SELECT 
+                SUM(price) expense, date_format(created_at, '%m/%Y') MONTH 
+            FROM bill
+            WHERE created_at > DATE_SUB(NOW(), INTERVAL 6 MONTH) 
+                AND status = 'PAID' 
+                AND id_user = :userId 
+            GROUP BY DATE_FORMAT(created_at , "%m/%Y")
+            ORDER BY DATE_FORMAT(created_at , "%m/%Y") DESC
+            LIMIT 6
+        </query>
+    </named-native-query>  
+
+    <sql-result-set-mapping name="findMonthlyExpenseMapping">
+        <constructor-result target-class="br.com.casuaiscontas.dto.bill.BillMonthlyExpense">
+            <column name="expense"/>
+            <column name="month"/>
+        </constructor-result>
+    </sql-result-set-mapping> 
+
+</entity-mappings>

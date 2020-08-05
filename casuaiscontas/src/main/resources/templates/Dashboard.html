@@ -22,12 +22,12 @@
                     <div class="row">
                         <div class="col-sm-12  col-md-12  col-lg-6  grafic">
                             <h2 class="grafic__title">Gastos nos últimos 6 meses</h2>
-                            <canvas id="lastSixMonths" height="160" data:url="@{/contas/gastos/mes/{id}(id=${#authentication.principal.user.id})}"></canvas>
+                            <canvas id="monthlyExpense" height="160" data:url="@{/contas/gastos/{id}(id=${#authentication.principal.user.id})}"></canvas>
                         </div>
     
                         <div class="col-sm-12  col-md-12  col-lg-6  grafic">
-                            <h2 class="grafic__title">Suas contas desse mês</h2>
-                            <canvas id="statusBillGrafic" height="160" data:url="@{/contas/gastos/mes/{id}(id=${#authentication.principal.user.id})}"></canvas>
+                            <h2 class="grafic__title">Gastos deste mês</h2>
+                            <canvas id="monthExpense" height="160" data:url="@{/contas/gastos/mes/{id}(id=${#authentication.principal.user.id})}"></canvas>
                         </div>
                     </div>
             

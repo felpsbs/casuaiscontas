@@ -1,6 +1,7 @@
 package br.com.casuaiscontas.repository.helper.bill;
 
-import java.time.MonthDay;
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -21,9 +22,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import br.com.casuaiscontas.dto.BillDto;
+import br.com.casuaiscontas.dto.bill.BillDto;
+import br.com.casuaiscontas.dto.bill.BillMonthlyExpense;
 import br.com.casuaiscontas.model.Bill;
-import br.com.casuaiscontas.model.BillStatus;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.repository.filter.BillFilter;
 import br.com.casuaiscontas.repository.pagination.PaginationUtil;
@@ -37,17 +38,15 @@ public class BillRepositoryImpl implements BillQueries {
 	private PaginationUtil paginationUtil;
 	
 	@Override
-	public Optional<BillDto> findMonthlyExpend(Long userId) {
-		String query = "select new br.com.casuaiscontas.dto.BillDto(sum(b.price), " 
-					+ "(select sum(bi.price) from Bill bi where bi.user.id = :userId and bi.status = :notPaid and month(bi.createdAt) = :month)) "
-					+ "from Bill b where b.user.id = :userId and b.status = :paid and month(b.createdAt) = :month";
-		
-		return manager.createQuery(query, BillDto.class)
-				.setParameter("userId", userId)
-				.setParameter("paid", BillStatus.PAID)
-				.setParameter("notPaid", BillStatus.NOT_PAID)
-				.setParameter("month", MonthDay.now().getMonthValue())
-				.getResultList().stream().findFirst();
+	public Optional<BillDto> findMonthExpense(Long userId) {
+		return manager.createNamedQuery("Bill.findMonthExpense", BillDto.class).setParameter("userId", userId)			
+			.getResultList().stream().findFirst();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<BillMonthlyExpense> findMonthlyExpense(Long userId) {
+		return this.filterMonths(manager.createNamedQuery("Bill.findMonthlyExpense").setParameter("userId", userId).getResultList());
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -58,13 +57,13 @@ public class BillRepositoryImpl implements BillQueries {
 		CriteriaQuery<Bill> query = builder.createQuery(Bill.class);
 		
 		Root<Bill> billEntity = query.from(Bill.class);		
-		Predicate[] filters = addFilter(billFilter, billEntity, user);
+		Predicate[] filters = this.addFilter(billFilter, billEntity, user);
 		query.select(billEntity).where(filters);		
 		
 		TypedQuery<Bill> typedQuery = (TypedQuery<Bill>) paginationUtil.setOrder(query, billEntity, pageable);
 		typedQuery = (TypedQuery<Bill>) paginationUtil.setInterval(typedQuery, pageable);
 		
-		return new PageImpl<>(typedQuery.getResultList(), pageable, total(billFilter, user));
+		return new PageImpl<>(typedQuery.getResultList(), pageable, this.total(billFilter, user));
 	}	
 
 	@Override
@@ -81,6 +80,27 @@ public class BillRepositoryImpl implements BillQueries {
 		TypedQuery<Bill> typedQuery = manager.createQuery(query);
 
 		return typedQuery.getResultList().stream().findFirst();
+	}
+	
+	private List<BillMonthlyExpense> filterMonths(List<BillMonthlyExpense> bills) {
+		LocalDate now = LocalDate.now();
+		
+		for (int i = 1; i <= 6; i++) {
+			String idealMonth = String.format("%02d/%d", now.getMonthValue(), now.getYear());
+		
+			boolean isPresent = bills.stream().filter(b -> b.getMonth().equals(idealMonth)).findAny().isPresent();
+			if(!isPresent) {
+				bills.add(i - 1, new BillMonthlyExpense(BigDecimal.ZERO, idealMonth));	
+			}
+			
+			now = now.minusMonths(1);
+		}
+
+		if(bills.size() > 6) {
+			bills.remove(bills.size() - 1);
+		}
+		
+		return bills;
 	}
 	
 	private Long total(BillFilter billFilter, User user) {

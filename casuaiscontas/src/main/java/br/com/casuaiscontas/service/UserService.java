@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import br.com.casuaiscontas.dto.user.UserDto;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.model.UserStatus;
 import br.com.casuaiscontas.repository.UserRepository;
@@ -35,7 +36,7 @@ public class UserService {
 			user.setActive(existentUser.getActive());
 			user.setPassword(existentUser.getPassword());
 		} else {
-			encodePassword(user);
+			this.encodePassword(user);
 		}
 
 		user.setConfirmPassword(user.getPassword());
@@ -43,6 +44,14 @@ public class UserService {
 		// enviar email
 
 		repository.save(user);
+	}
+	
+	@Transactional
+	public void updatePassword(Long id, UserDto userDto) {
+		User user = repository.findById(id).get();		
+		user.setPassword(userDto.getPassword());
+		this.encodePassword(user);			
+		repository.saveAndFlush(user);
 	}
 	
 	@Transactional
@@ -58,17 +67,21 @@ public class UserService {
 		return repository.findUserWithGroups(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));		
 	}
 	
-	public Page<User> filter(UserFilter userFilter, Pageable pageable) {
-		return repository.filter(userFilter, pageable);
+	public User findByEmail(String email) {
+		return repository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
 	}
-	
+
 	public Optional<User> findByEmailAndActive(String email) {
 		return repository.byEmailAndActive(email);
 	}
-	
+
+	public Page<User> filter(UserFilter userFilter, Pageable pageable) {
+		return repository.filter(userFilter, pageable);
+	}
+		
 	public List<String> findPermitions(User user) {
 		return repository.findPermitions(user);
-	}
+	}		
 	
 	private void encodePassword(User user) {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));

@@ -19,10 +19,10 @@
         <query>
             SELECT 
                 new br.com.casuaiscontas.dto.bill.BillDto(
-                    SUM(b.price), 
+                    SUM(price), 
                     (SELECT SUM(price) FROM Bill WHERE user.id = :userId AND status = 'NOT_PAID' AND MONTH(createdAt) = MONTH(NOW()))
                 ) 
-            FROM Bill b 
+            FROM Bill 
             WHERE user.id = :userId 
                 AND status = 'PAID' 
                 AND MONTH(createdAt) = MONTH(NOW())
@@ -33,13 +33,13 @@
     <named-native-query name="Bill.findMonthlyExpense" result-set-mapping="findMonthlyExpenseMapping">
         <query>
             SELECT 
-                SUM(price) expense, date_format(created_at, '%m/%Y') MONTH 
+                SUM(price) expense, DATE_FORMAT(created_at, '%m/%Y') month 
             FROM bill
             WHERE created_at > DATE_SUB(NOW(), INTERVAL 6 MONTH) 
                 AND status = 'PAID' 
                 AND id_user = :userId 
-            GROUP BY DATE_FORMAT(created_at , "%m/%Y")
-            ORDER BY DATE_FORMAT(created_at , "%m/%Y") DESC
+            GROUP BY DATE_FORMAT(created_at, "%m/%Y")
+            ORDER BY DATE_FORMAT(created_at, "%m/%Y") DESC
             LIMIT 6
         </query>
     </named-native-query>  

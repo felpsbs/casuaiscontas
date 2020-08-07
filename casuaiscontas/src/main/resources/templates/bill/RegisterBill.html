@@ -31,7 +31,7 @@
                                 
                         <div class="row">
                             <div class="form-group  col-sm-6  col-md-4  cc-required">
-                                <label for="name" class="control-label"><b>Nome:</b></label>
+                                <label for="name" class="control-label"><b>Nome</b></label>
                                 <input type="text" id="name" class="form-control  form-input" th:field="*{name}" casuaiscontas:classforerror="name">
                                 <casuaiscontas:errorfeedback field="name" />
                             </div>                                 
@@ -45,7 +45,7 @@
 
                         <div class="row">
                             <div class="form-group  col-sm-6  col-md-4  cc-required"> 
-                                <label for="price" class="control-label"><b>Preço:</b></label>                                                
+                                <label for="price" class="control-label"><b>Preço</b></label>                                                
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                       <span class="input-group-text">R$</span>
@@ -56,7 +56,7 @@
                             </div> 
                             
                             <div class="form-group  col-sm-6  col-md-4  cc-required">
-                                <label for="quantity" class="control-label"><b>Quantidade:</b></label>
+                                <label for="quantity" class="control-label"><b>Quantidade</b></label>
                                 <input type="text" id="quantity" class="form-control  form-input  js-plain" th:field="*{quantity}" casuaiscontas:classforerror="quantity">
                                 <casuaiscontas:errorfeedback field="quantity" />
                             </div>
@@ -64,7 +64,7 @@
                         
                         <div class="row">
                             <div class="form-group  col-sm-12  cc-required">
-                                <label for="description" class="control-label"><b>Descrição:</b></label>                                                
+                                <label for="description" class="control-label"><b>Descrição</b></label>                                                
                                 <textarea id="description" class="form-control  form-input" th:field="*{description}" casuaiscontas:classforerror="description"></textarea>                        
                                 <casuaiscontas:errorfeedback field="description" />
                             </div>
@@ -72,7 +72,7 @@
     
                         <div class="row" th:if="${not bill.new}">
                             <div class="form-group  col-sm-6  col-lg-4  cc-required">
-                                <label for="status" class="control-label"><b>Status:</b></label>
+                                <label for="status" class="control-label"><b>Status</b></label>
                                 <select id="status" class="form-control  form-input" th:field="*{status}" casuaiscontas:classforerror="status">
                                     <option value="">Selecione um status</option>
                                     <option th:each="status : ${allStatus}" th:value="${status}" th:text="${status.description}">Paga</option>

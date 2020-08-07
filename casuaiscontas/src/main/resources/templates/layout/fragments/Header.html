@@ -42,7 +42,7 @@
                                 <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Minha Conta</a>                                
                                 <div class="dropdown-menu  dropdown-menu" aria-labelledby="navbarDropdown">                                  
                                     <a class="dropdown-item" th:href="@{/usuarios/{id}(id=${#authentication.principal.user.id})}">Alterar Perfil</a>
-                                    <a class="dropdown-item" href="#">Alterar Senha</a>
+                                    <a class="dropdown-item" th:href="@{/usuarios/senha}">Alterar Senha</a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" th:href="@{/logout}"><i class="fa fa-sign-out"></i>Sair</a>                                 
                                 </div>

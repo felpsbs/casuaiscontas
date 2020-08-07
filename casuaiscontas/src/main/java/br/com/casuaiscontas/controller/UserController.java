@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casuaiscontas.controller.page.PageWrapper;
+import br.com.casuaiscontas.dto.user.UserDto;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.model.UserStatus;
 import br.com.casuaiscontas.repository.filter.UserFilter;
@@ -79,6 +80,25 @@ public class UserController {
 		ModelAndView mv = registerForm(user);
 		mv.addObject(user);
 		return mv;
+	}
+	
+	@GetMapping("/senha")
+	public ModelAndView updatePasswordForm(UserDto userDto) {				
+		return new ModelAndView("user/UpdatePassword");		
+	}
+	
+	@PreAuthorize("#id == principal.user.id")
+	@PostMapping("/{id}/senha")
+	public ModelAndView updatePassword(@Valid UserDto userDto, BindingResult result, @PathVariable Long id, RedirectAttributes attr) {				
+		if(result.hasErrors()) {
+			return updatePasswordForm(userDto);
+		}
+			
+		userService.updatePassword(id, userDto);			
+		
+		attr.addFlashAttribute("success", true);
+		attr.addFlashAttribute("message", "Operação realizada com sucesso.");
+		return new ModelAndView("redirect:/usuarios/senha");
 	}
 	
 	@PreAuthorize("hasRole('ROLE_CADASTRAR_USUARIO')")

@@ -35,7 +35,7 @@
                                 
                         <div class="row">
                             <div class="form-group  col-sm-6  col-md-4">
-                                <label for="name" class="control-label"><b>Nome:</b></label>
+                                <label for="name" class="control-label"><b>Nome</b></label>
                                 <input type="text" id="name" class="form-control  form-input" th:field="*{name}">                            
                             </div>                                 
                             
@@ -45,7 +45,7 @@
                             </div> 
     
                             <div class="form-group  col-sm-6  col-md-4">
-                                <label for="status" class="control-label"><b>Status:</b></label>
+                                <label for="status" class="control-label"><b>Status</b></label>
                                 <select id="status" class="form-control  form-input" th:field="*{status}">
                                     <option value="">Selecione um status</option>
                                     <option th:each="status : ${allStatus}" th:value="${status}" th:text="${status.description}">Paga</option>
@@ -55,7 +55,7 @@
                         
                         <div class="row">
                             <div class="col-sm-12  col-lg-12  form-group">
-                                <label for="priceFrom"><b> Valor da conta:</b></label>
+                                <label for="priceFrom"><b> Valor da conta</b></label>
                                 <div class="form-inline">
                                     <div>
                                         <div class="input-group mb-3">

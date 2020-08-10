@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,6 +16,7 @@ import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.model.UserStatus;
 import br.com.casuaiscontas.repository.UserRepository;
 import br.com.casuaiscontas.repository.filter.UserFilter;
+import br.com.casuaiscontas.service.event.user.SaveUserEvent;
 import br.com.casuaiscontas.service.exception.CpfAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.EmailAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.UserNotFoundException;
@@ -27,6 +29,9 @@ public class UserService {
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private ApplicationEventPublisher publisher;
 
 	@Transactional
 	public void save(User user) {
@@ -39,11 +44,8 @@ public class UserService {
 			this.encodePassword(user);
 		}
 
-		user.setConfirmPassword(user.getPassword());
-
-		// enviar email
-
-		repository.save(user);
+		user.setConfirmPassword(user.getPassword());				
+		publisher.publishEvent(new SaveUserEvent(repository.saveAndFlush(user)));
 	}
 	
 	@Transactional
@@ -57,6 +59,13 @@ public class UserService {
 	@Transactional
 	public void updateStatus(Long[] ids, UserStatus userStatus) {
 		userStatus.update(ids, this);
+	}
+	
+	@Transactional
+	public void confirmRegister(Long id) {
+		User user = repository.findById(id).get();
+		user.setActive(Boolean.TRUE);
+		repository.saveAndFlush(user);
 	}
 	
 	public void updateStatus(Long[] ids, boolean status) {

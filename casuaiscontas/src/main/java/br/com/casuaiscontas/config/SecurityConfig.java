@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http
 			.authorizeRequests()
 				.antMatchers(HttpMethod.GET, "/cidades").permitAll()
+				.antMatchers(HttpMethod.GET, "/usuarios/cadastro/confirmacao").permitAll()
 				.antMatchers("/usuarios/novo").permitAll()
 				.antMatchers("/cidades/*").hasRole("CADASTRAR_CIDADE")
 				.anyRequest().authenticated()

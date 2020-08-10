@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html 
+    lang="pt" 
+    xmlns="http://www.w3.org/1999/xhtml" 
+    xmlns:th="http://www.thymeleaf.org"
+>
+    <head>
+        <title>CasuaisContas</title>
+
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="Aplicação para deixar as suas contas mais organizadas" />
+        <meta name="author" content="casuaiscontas" />
+
+    </head>
+    
+    <body style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
+        
+        <div>            
+            <div style="margin-top: 30px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); padding: 20px;">
+                <div style="text-align: center;">
+                    <img src="/static/img/logo.png" th:src="|cid:${logo}|" class="img" height="30px" alt="CasuaisContas">
+                </div>
+                <div class="body">
+                  <h5 class="title" style=" border-bottom: 1px solid #ccc; margin-bottom: 20px; font-size: 20px;">Confirmação de cadastro.</h5>
+                  <p class="text">Estamos quase terminando. Para finalizar o seu cadastro clique no botão abaixo:</p>                  
+                </div>
+                <div style="margin-top: 20px;">
+                    <a th:href="${link}" style="padding: 10px; border-radius: 5px; box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); text-decoration: none; color: #fff; background-color: #3565F9;">
+                        Confirmar
+                    </a>
+                </div>
+            </div>
+        </div>        
+
+    </body>
+
+</html>

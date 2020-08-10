@@ -117,8 +117,14 @@ public class UserController {
 		return mv;
 	}	
 	
+	@GetMapping("/cadastro/confirmacao")
+	public ModelAndView confirmRegister(@RequestParam("id") Long id) {
+		userService.confirmRegister(id);	
+		return new ModelAndView("redirect:/login");
+	}
+
 	private String successMessage(User user) {
 		return user.isNew() ? "Cadastro realizado com sucesso, verifique seu e-mail!" : "Operação realizada com sucesso"; 
-	}
+	}	
 
 }

@@ -1,6 +1,7 @@
 package br.com.casuaiscontas.model;
 
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -9,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.PostLoad;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Table;
@@ -42,7 +44,7 @@ public class User extends BaseModel {
 
 	@Transient
 	private String confirmPassword;
-
+	
 	@NotBlank
 	private String phone;
 
@@ -66,18 +68,28 @@ public class User extends BaseModel {
 
 	@ManyToMany
 	@JoinTable(name = "user_grupo", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_grupo"))
-	private Set<Group> groups;
+	private Set<Group> groups = new HashSet<>();
+	
+	@Transient
+	private LegalEntity legalEntity = LegalEntity.NATURAL_PERSON; 
 
 	@PrePersist
-	public void onSave() {
-		active = Boolean.FALSE;
-		createdAt = LocalDate.now();
+	private void onSave() {
+		this.active = Boolean.FALSE;
+		this.createdAt = LocalDate.now();
+		this.cpf = LegalEntity.removeFormatting(this.cpf);
 	}
 
 	@PreUpdate
-	public void onUpdate() {
-		confirmPassword = password;
-		updatedAt = LocalDate.now();
+	private void onUpdate() {
+		this.confirmPassword = password;
+		this.updatedAt = LocalDate.now();
+		this.cpf = LegalEntity.removeFormatting(this.cpf);
+	}
+	
+	@PostLoad
+	private void postLoad() {
+		this.cpf = this.legalEntity.format(this.cpf);
 	}
 
 	public String getEmail() {

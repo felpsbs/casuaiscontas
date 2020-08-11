@@ -1,5 +1,6 @@
 package br.com.casuaiscontas.model;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ public class Group extends BaseModel {
 
 	@ManyToMany
 	@JoinTable(name = "grupo_permition", joinColumns = @JoinColumn(name = "id_grupo"), inverseJoinColumns = @JoinColumn(name = "id_permition"))
-	private Set<Permition> permitions;
+	private Set<Permition> permitions = new HashSet<>();
 
 	public Set<Permition> getPermitions() {
 		return permitions;

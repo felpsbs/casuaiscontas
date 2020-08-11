@@ -54,6 +54,8 @@ public class UserController {
 
 	@PostMapping({ "/novo", "{\\d+}" })
 	public ModelAndView register(@Valid User user, BindingResult result, RedirectAttributes attr) {
+		String message = getFeedbackMessage(user);
+		
 		if (result.hasErrors()) {
 			return registerForm(user);
 		}
@@ -69,7 +71,7 @@ public class UserController {
 		}
 
 		attr.addFlashAttribute("success", true);
-		attr.addFlashAttribute("message", successMessage(user));
+		attr.addFlashAttribute("message", message);
 		return new ModelAndView("redirect:/usuarios/novo");
 	}
 
@@ -123,7 +125,7 @@ public class UserController {
 		return new ModelAndView("redirect:/login");
 	}
 
-	private String successMessage(User user) {
+	private String getFeedbackMessage(User user) {
 		return user.isNew() ? "Cadastro realizado com sucesso, verifique seu e-mail!" : "Operação realizada com sucesso"; 
 	}	
 

@@ -21,7 +21,7 @@ public abstract class BaseModel implements Serializable {
 	private String name;
 
 	public boolean isNew() {
-		return id == null;
+		return this.id == null;
 	}
 
 	public Long getId() {

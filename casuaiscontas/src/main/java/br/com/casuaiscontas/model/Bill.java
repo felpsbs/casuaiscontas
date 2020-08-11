@@ -63,13 +63,13 @@ public class Bill extends BaseModel{
 	private User user;
 
 	@PrePersist
-	public void onSave() {
-		createdAt = LocalDate.now();
+	private void onSave() {
+		this.createdAt = LocalDate.now();
 	}
 
 	@PreUpdate
-	public void onUpdate() {
-		updatedAt = LocalDate.now();
+	private void onUpdate() {
+		this.updatedAt = LocalDate.now();
 	}
 
 	public String getDescription() {
@@ -137,7 +137,7 @@ public class Bill extends BaseModel{
 	}
 
 	public BigDecimal getTotal() {		
-		return price.multiply(new BigDecimal(quantity));
+		return this.price.multiply(new BigDecimal(this.quantity));
 	}
 	
 	public boolean isPayed() {

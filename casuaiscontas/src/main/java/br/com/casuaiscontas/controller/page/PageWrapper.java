@@ -66,7 +66,7 @@ public class PageWrapper<T> {
 	}
 		
 	public String urlToPage(int page) {
-		return uriBuilder.replaceQueryParam("page", page).build(true).encode().toUriString();
+		return this.uriBuilder.replaceQueryParam("page", page).build(true).encode().toUriString();
 	}
 	
 	public String urlOrder(String propertie) {

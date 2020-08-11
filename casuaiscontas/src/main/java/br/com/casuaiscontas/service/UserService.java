@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.casuaiscontas.dto.user.UserDto;
+import br.com.casuaiscontas.model.LegalEntity;
 import br.com.casuaiscontas.model.User;
 import br.com.casuaiscontas.model.UserStatus;
 import br.com.casuaiscontas.repository.UserRepository;
@@ -97,7 +98,7 @@ public class UserService {
 	}
 
 	private User isPresent(User user) {
-		Optional<User> existentUser = repository.findByCpf(user.getCpf());
+		Optional<User> existentUser = repository.findByCpf(LegalEntity.removeFormatting(user.getCpf()));
 		if (existentUser.isPresent() && !existentUser.get().equals(user)) {
 			throw new CpfAlreadyExistsException("CPF já cadastrado");
 		}

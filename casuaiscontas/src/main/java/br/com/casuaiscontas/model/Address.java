@@ -34,7 +34,7 @@ public class Address implements Serializable {
 	}
 
 	public State getState() {
-		return city != null && state == null ? city.getState() : state;
+		return this.city != null && this.state == null ? this.city.getState() : this.state;
 	}
 
 	public void setState(State state) {

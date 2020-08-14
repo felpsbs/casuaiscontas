@@ -24,20 +24,31 @@
     FORM HEADER
 \*---------------------------*/
 
-.form-header {
+.page-header {
     border-bottom: 1px solid #ccc;
     
     margin-top: 15px;
     margin-bottom: 25px;
 }
 
-.form-header__title {
+.page-header__title {
     margin: 0 0 5px;
 
     color: #004b68;
     
     font-size: 3.5rem;
     text-align: center;
+}
+
+.page-header__subtitle {
+    padding: 10px;
+    border: 1px solid #cccc00;
+    border-radius: 5px;    
+    margin-bottom: 15px;
+    
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+
+    color: #004b68;
 }
 
 /*---------------------------\*

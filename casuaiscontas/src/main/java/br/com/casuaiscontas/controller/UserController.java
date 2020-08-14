@@ -30,6 +30,7 @@ import br.com.casuaiscontas.service.StateService;
 import br.com.casuaiscontas.service.UserService;
 import br.com.casuaiscontas.service.exception.CpfAlreadyExistsException;
 import br.com.casuaiscontas.service.exception.EmailAlreadyExistsException;
+import br.com.casuaiscontas.service.exception.UserNotFoundException;
 
 @Controller
 @RequestMapping("/usuarios")
@@ -122,6 +123,51 @@ public class UserController {
 	@GetMapping("/cadastro/confirmacao")
 	public ModelAndView confirmRegister(@RequestParam("id") Long id) {
 		userService.confirmRegister(id);	
+		return new ModelAndView("redirect:/login");
+	}
+	
+	@GetMapping("/recuperar/senha")
+	public ModelAndView resetPasswordForm() {
+		return new ModelAndView("user/PasswordReset");
+	}
+	
+	@GetMapping("/recuperar/senha/{email}")
+	public ModelAndView resetPasswordForm(@PathVariable String email) {
+		UserDto userDto = userService.verify(email);
+		ModelAndView mv = updatePasswordForm(userDto); 
+		mv.addObject(userDto);
+		return mv;
+	}
+	
+	@PostMapping("/recuperar/senha")
+	public ModelAndView resetPassword(String email, RedirectAttributes attr) {
+		try {
+			userService.generateCod(email);			
+		} catch (UserNotFoundException e) {
+			attr.addFlashAttribute("message", "E-mail inválido.");
+			return new ModelAndView("redirect:/usuarios/recuperar/senha");
+		}
+		
+		attr.addFlashAttribute("success", true);
+		attr.addFlashAttribute("message", String.format("Um email foi enviado para  %s com os passos para redefinir sua senha.", email));
+		return new ModelAndView("redirect:/usuarios/recuperar/senha");
+	}
+	
+	@PostMapping("/redefinir/senha")
+	public ModelAndView resetPassword(@Valid UserDto userDto, BindingResult result, RedirectAttributes attr) {
+		if(result.hasErrors()) {
+			return updatePasswordForm(userDto); 
+		}
+		
+		try {
+			userService.updatePassword(userDto);			
+		} catch (IllegalArgumentException e) {
+			result.rejectValue("cod", e.getMessage(), e.getMessage());
+			return updatePasswordForm(userDto);
+		}
+		
+		attr.addFlashAttribute("success", true);
+		attr.addFlashAttribute("message", "Senha redefinida com sucesso.");
 		return new ModelAndView("redirect:/login");
 	}
 

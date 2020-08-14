@@ -1,0 +1,2 @@
+ALTER TABLE user 
+ADD cod VARCHAR(4);

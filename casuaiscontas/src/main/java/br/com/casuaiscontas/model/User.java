@@ -44,7 +44,7 @@ public class User extends BaseModel {
 
 	@Transient
 	private String confirmPassword;
-	
+
 	@NotBlank
 	private String phone;
 
@@ -69,9 +69,11 @@ public class User extends BaseModel {
 	@ManyToMany
 	@JoinTable(name = "user_grupo", joinColumns = @JoinColumn(name = "id_user"), inverseJoinColumns = @JoinColumn(name = "id_grupo"))
 	private Set<Group> groups = new HashSet<>();
-	
+
 	@Transient
-	private LegalEntity legalEntity = LegalEntity.NATURAL_PERSON; 
+	private LegalEntity legalEntity = LegalEntity.NATURAL_PERSON;
+
+	private String cod;
 
 	@PrePersist
 	private void onSave() {
@@ -86,7 +88,7 @@ public class User extends BaseModel {
 		this.updatedAt = LocalDate.now();
 		this.cpf = LegalEntity.removeFormatting(this.cpf);
 	}
-	
+
 	@PostLoad
 	private void postLoad() {
 		this.cpf = this.legalEntity.format(this.cpf);
@@ -171,7 +173,15 @@ public class User extends BaseModel {
 	public void setGroups(Set<Group> groups) {
 		this.groups = groups;
 	}
-	
+
+	public String getCod() {
+		return cod;
+	}
+
+	public void setCod(String cod) {
+		this.cod = cod;
+	}
+
 	public String getStatusName() {
 		return this.active ? "Ativo" : "Inativo";
 	}

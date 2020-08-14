@@ -21,8 +21,8 @@
                     
                     <form th:action="${bill.new} ? @{/contas/nova} : @{/contas/{id}(id=${bill.id})}" th:object="${bill}" class="form" method="post">  
                         
-                        <header class="form-header">
-                            <h1 class="form-header__title" th:text="${bill.new ? 'Cadastrar conta' : 'Atualizar conta'}">Cadastro</h1>                                  
+                        <header class="page-header">
+                            <h1 class="page-header__title" th:text="${bill.new ? 'Cadastrar conta' : 'Atualizar conta'}">Cadastro</h1>                                  
                         </header>
                         
                         <casuaiscontas:messages /> 

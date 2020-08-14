@@ -10,12 +10,20 @@ import br.com.casuaiscontas.validation.constraint.ConfirmationAttribute;
 public class UserDto {
 
 	private String email;
-	private String verificationCod;
+	private String cod;
 
 	@Size(min = 6)
 	private String password;
 
 	private String confirmPassword;
+
+	public UserDto() {
+
+	}
+
+	public UserDto(String email) {
+		this.email = email;
+	}
 
 	public String getEmail() {
 		return email;
@@ -25,12 +33,12 @@ public class UserDto {
 		this.email = email;
 	}
 
-	public String getVerificationCod() {
-		return verificationCod;
+	public String getCod() {
+		return cod;
 	}
 
-	public void setVerificationCod(String verificationCod) {
-		this.verificationCod = verificationCod;
+	public void setCod(String cod) {
+		this.cod = cod;
 	}
 
 	public String getPassword() {
@@ -48,9 +56,13 @@ public class UserDto {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
-	
+
 	public boolean isAuthenticated() {
-		return !StringUtils.isEmpty(email); 
+		return !StringUtils.isEmpty(email);
+	}
+
+	public boolean isCodEquals(String cod) {
+		return this.cod.equals(cod);
 	}
 
 }

@@ -61,6 +61,20 @@ CasuaisContas.MaskCep = (function() {
 
 })();
 
+CasuaisContas.MaskCode = (function() {
+
+    function MaskCode() {
+        this.inputDate = $('.js-code');
+    }
+
+    MaskCode.prototype.start = function() {
+        this.inputDate.mask('AAAA');
+    }
+
+    return MaskCode;
+
+})();
+
 CasuaisContas.MaskCpf = (function() {
 
     function MaskCpf() {
@@ -149,4 +163,7 @@ $(function() {
 
     var tooltip = new CasuaisContas.Tooltip();
     tooltip.start();
+
+    var maskCode = new CasuaisContas.MaskCode();
+    maskCode.start();
 });

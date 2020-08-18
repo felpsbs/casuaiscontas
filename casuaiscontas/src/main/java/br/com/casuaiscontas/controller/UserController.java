@@ -170,7 +170,7 @@ public class UserController {
 		attr.addFlashAttribute("message", "Senha redefinida com sucesso.");
 		return new ModelAndView("redirect:/login");
 	}
-
+	
 	private String getFeedbackMessage(User user) {
 		return user.isNew() ? "Cadastro realizado com sucesso, verifique seu e-mail!" : "Operação realizada com sucesso"; 
 	}	

@@ -62,7 +62,7 @@ public class UserDto {
 	}
 
 	public boolean isCodEquals(String cod) {
-		return this.cod.equals(cod);
+		return this.cod.equals(cod) && !cod.isEmpty();
 	}
 
 }

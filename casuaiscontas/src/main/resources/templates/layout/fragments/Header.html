@@ -25,7 +25,7 @@
                                 <a th:href="@{/contas/{id}(id=${#authentication.principal.user.id})}" class="nav-link">Contas</a>
                             </li>
                             <li class="nav-item" th:unless="${#authorization.expression('hasRole(''ROLE_CADASTRAR_USUARIO'')')}">
-                                <a href="#" class="nav-link">Despesas</a>
+                                <a th:href="@{/relatorios}" class="nav-link">Relatórios</a>
                             </li>
                             <li class="nav-item dropdown" sec:authorize="hasRole('ROLE_CADASTRAR_USUARIO')">
                                 <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle">Admin</a>                                

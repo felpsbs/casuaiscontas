@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/BaseLayout}"
+    xmlns:casuaiscontas="http://casuaiscontas.com"
+>
+    <head>
+
+        <title>Relatório personalizado</title>
+
+    </head>
+    <body>
+
+        <section layout:fragment="content">
+
+            <div class="layout-signin">
+            
+                <div class="container">
+    
+                    <form th:action="@{/relatorios/{id}/personalizado(id=${#authentication.principal.user.id})}" th:object="${customReport}" method="post" class="form">
+                        
+                        <header class="page-header">
+                            <h1 class="page-header__title">Relatório personalizado</h1>                                  
+                        </header>                                          
+
+                        <div class="row">
+                            <div class="col-sm-12  col-lg-12  form-group  js-datepicker-container">
+                                <label for="dateFrom"><i class="fa fa-calendar"></i><b> Data de criação:</b></label>
+                                <div class="form-inline">
+                                    <div>                                        
+                                        <input type="text" th:field="*{dateFrom}" id="dateFrom" class="form-control  form-input  js-date" autocomplete="off" required>                                                                                                    
+                                    </div>                                
+                                    <label for="dateTo" class="price__to"><b>a</b></label>
+                                    <div>
+                                        <input type="text" th:field="*{dateTo}" id="dateTo" class="form-control  form-input  js-date" autocomplete="off" required>                                                                                                                                            
+                                    </div>
+                                </div>
+                            </div>                
+                        </div>                    
+                        
+                        <footer>
+                            <div class="layout-signin__button">
+                                <button type="submit" class="btn  btn-primary  button">Gerar relatório</button>
+                            </div>
+                        </footer> 
+                        
+                    </form>
+                                                
+                </div>
+            </div>
+            
+        </section>
+
+    </body>
+</html>

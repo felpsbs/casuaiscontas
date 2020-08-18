@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="~{layout/BaseLayout}"
+    xmlns:casuaiscontas="http://casuaiscontas.com"
+>
+    <head>
+
+        <title>Relatórios</title>
+
+    </head>
+    <body>
+
+        <section layout:fragment="content">
+
+            <div class="layout-signin">
+            
+                <div class="container">
+    
+                    <header class="page-header">
+                        <h1 class="page-header__title">Escolha o seu relatório</h1>                                  
+                    </header>
+
+                    <casuaiscontas:messages /> 
+                                                                                
+                    <div class="row">
+                    
+                        <div class="col-12  col-md-6  col-sm-12  report">
+                            <a th:href="@{/relatorios/{id}/mes-atual(id=${#authentication.principal.user.id})}" class="report__link">                            
+                                <div class="report__area">                                                                
+                                    <span class="report__title"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório deste mês</span>
+                                </div>     
+                            </a>                        
+                        </div>                    
+    
+                        <div class="col-12  col-md-6  col-sm-12">                       
+                            <a th:href="@{/relatorios/personalizado}" class="report__link">
+                                <div class="report__area">
+                                    <span class="report__title"><i class="fa fa-file-pdf-o" aria-hidden="true"></i> Relatório personalizado</span>
+                                </div>     
+                            </a>    
+                        </div>
+    
+                    </div>                                                     
+                                                
+                </div>
+            </div>
+            
+        </section>
+
+    </body>
+</html>

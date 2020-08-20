@@ -49,19 +49,19 @@
                         </div>
     
                         <button type="submit" class="btn  btn-primary  float-right  button">Entrar</button>
-                        
-                        <div class="login__register-link">
-                            <div class="row">
+                                                
+                        <div class="layout-login-links  row">
+                            <div>
                                 <div class="col-sm-12">
-                                    <a th:href="@{/usuarios/novo}">Ainda não possui cadastro?</a>                                    
+                                    <a th:href="@{/usuarios/novo}" class="layout-login-links__links"><i class="fa fa-sign-in" aria-hidden="true"></i> Ainda não possui cadastro?</a>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div>
                                 <div class="col-sm-12">
-                                    <a th:href="@{/usuarios/recuperar/senha}">Esqueci minha senha.</a>                                    
+                                    <a th:href="@{/usuarios/recuperar/senha}" class="layout-login-links__links">Esqueci minha senha</a>                                
                                 </div>
                             </div>
-                        </div>                    
+                        </div>                            
                     </footer>
                    
                 </form>

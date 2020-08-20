@@ -31,15 +31,13 @@ public class ReportService {
 	private DataSource dataSource;
 
 	public byte[] generateMonthlyReport(CustomReport customReport, Long id) {
-		Date dateFrom = Date.from(LocalDateTime.of(customReport.getDateFrom(), LocalTime.of(0, 0, 0))
-				.atZone(ZoneId.systemDefault()).toInstant());
-		Date dateTo = Date.from(LocalDateTime.of(customReport.getDateTo(), LocalTime.of(23, 59, 59))
-				.atZone(ZoneId.systemDefault()).toInstant());
+		Date dateFrom = Date.from(LocalDateTime.of(customReport.getDateFrom(), LocalTime.of(0, 0, 0)).atZone(ZoneId.systemDefault()).toInstant());
+		Date dateTo = Date.from(LocalDateTime.of(customReport.getDateTo(), LocalTime.of(23, 59, 59)).atZone(ZoneId.systemDefault()).toInstant());
 		
 		Map<String, Object> parametros = new HashMap<>();
 		parametros.put("format", "pdf");
-		parametros.put("data_inicio", dateFrom);
-		parametros.put("data_fim", dateTo);
+		parametros.put("date_from", dateFrom);
+		parametros.put("date_to", dateTo);
 		parametros.put("id_user", id);
 		parametros.put("logo_path", "static/img/logo.png");
 

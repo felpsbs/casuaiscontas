@@ -60,4 +60,5 @@ public class ReportController {
 	private ResponseEntity<byte[]> send(byte[] report) {
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_PDF_VALUE).body(report);
 	}
+	
 }

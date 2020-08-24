@@ -29,8 +29,6 @@
     
     margin-top: 15px;
     margin-bottom: 25px;
-
-    text-shadow: 1px 1px #313131;
 }
 
 .page-header__title {
@@ -179,7 +177,6 @@
     
     font-size: 2.5rem;
     text-align: center;
-    text-shadow: 1px 1px #313131;
 }
 
 @media(max-width: 991px) {

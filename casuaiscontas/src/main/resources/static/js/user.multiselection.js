@@ -3,7 +3,7 @@ var CasuaisContas = CasuaisContas || {};
 CasuaisContas.Multiselect = (function() {
 
     function Multiselect() {
-        this.select = $('.js-select');
+        this.select = $('.js-selected');
         this.selectAll = $('.js-select-all');
         this.btnStatus = $('.js-btn-status');
         this.btnActionStatus = $('.js-btn-status');

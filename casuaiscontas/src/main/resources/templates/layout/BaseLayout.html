@@ -24,7 +24,10 @@
         <link rel="shortcut icon" th:href="@{/img/favicon.jpg}"/>
     </head>
     <body>       
-
+        
+        <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+        <input type="hidden" name="_csrf_header" th:value="${_csrf.headerName}"/>
+    
         <!-- Header -->
         <div th:replace="layout/fragments/Header :: header"></div>
 
@@ -33,7 +36,6 @@
 
         <!-- Footer -->
         <div th:replace="layout/fragments/Footer :: footer"></div>
-
 
         <!-- Geral -->
         <script th:src="@{/js/vendors/jquery-3.5.1.min.js}"></script>
@@ -44,9 +46,11 @@
         <script th:src="@{/js/vendors/bootstrap-datepicker.pt-BR.min.js}"></script> 
         <script th:src="@{/js/vendors/bootstrap-switch.min.js}"></script> 
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>       
+        
         <!-- Criados por mim -->
         <script th:src="@{/js/casuaiscontas.js}"></script>
         <script th:src="@{/js/casuaiscontas.delete-dialog.js}"></script>        
+        
         <!-- Extra -->
         <th:block layout:fragment="js-extra"></th:block>
 

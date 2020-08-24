@@ -142,6 +142,23 @@ CasuaisContas.Tooltip = (function() {
 
 })();
 
+CasuaisContas.Security = (function() {
+	
+	function Security() {
+		this.token = $('input[name=_csrf]').val();
+		this.header = $('input[name=_csrf_header]').val();
+	}
+	
+	Security.prototype.start = function() {		
+		$(document).ajaxSend(function(event, jqxhr, settings) {
+			jqxhr.setRequestHeader(this.header, this.token);		
+		}.bind(this));
+	}
+	
+    return Security;
+    
+})();
+
 $(function() {
     var maskDate = new CasuaisContas.MaskDate();
     maskDate.start();
@@ -166,4 +183,7 @@ $(function() {
 
     var maskCode = new CasuaisContas.MaskCode();
     maskCode.start();
+    
+    var security = new CasuaisContas.Security();
+    security.start();
 });

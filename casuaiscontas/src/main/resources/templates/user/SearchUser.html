@@ -101,7 +101,7 @@
                                   <tr th:each="user : ${page.content}"> 
                                     <td>
                                         <div th:if="${#authentication.principal.user.id != user.id}">
-                                            <input type="checkbox" data:id="${user.id}" class="js-select">
+                                            <input type="checkbox" data:id="${user.id}" class="js-selected">
                                         </div>
                                     </td>                            
                                     <td th:text="${user.name}">João</td>                                
@@ -140,7 +140,7 @@
         </section>
 
         <th:block layout:fragment="js-extra">            
-            <script th:src="@{/js/multiselection.js}"></script>
+            <script th:src="@{/js/user.multiselection.js}"></script>
         </th:block>
 
     </body>

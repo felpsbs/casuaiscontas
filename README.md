@@ -1,4 +1,8 @@
-![title](./casuaiscontas/src/main/resources/static/img/logo.png)
+
+<img src="./casuaiscontas/src/main/resources/static/img/logo.png" alt="título" style="display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;">
 
 ***
 ## :bulb: Sobre o projeto
@@ -26,20 +30,20 @@
 
 - _Tela de Login_
 
-![title](/home/felipe/Documentos/tela-login.png)
+![title](img/tela-login.png)
 
 - _Home_
 
-![title](/home/felipe/Documentos/home.png)
+![title](img/home.png)
 
 - _Tela de opções de relatório_
 
-![title](/home/felipe/Documentos/tipos-relatorios.png)
+![title](img/tipos-relatorios.png)
 
 - _Tela para pesquisar contas/despesas_
 
-![title](/home/felipe/Documentos/contas.png)
+![title](img/contas.png)
 
 - _Exemplo de relatório gerado_
 
-![title](/home/felipe/Documentos/relatorio.png)
+![title](img/relatorio.png)

@@ -23,7 +23,7 @@
 		<java.version>1.8</java.version>
 		
 		<!-- Apache Commons BeanUtils -->
-		<commons-beatils.version>1.9.3</commons-beatils.version>	
+		<commons-beatils.version>1.9.4</commons-beatils.version>	
 		
 		<!-- JasperReports -->
 		<jasperreports.version>6.14.0</jasperreports.version>
